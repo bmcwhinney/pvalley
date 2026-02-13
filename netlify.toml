@@ -30,9 +30,11 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Redirect www to non-www (or vice versa — adjust to match your domain)
-[[redirects]]
-  from = "https://paradisevalleydominica.com/*"
-  to = "https://www.paradisevalleydominica.com/:splat"
-  status = 301
-  force = true
+# NOTE: Add domain redirect only after custom domain is configured in Netlify.
+# Uncomment the lines below once paradisevalleydominica.com is connected:
+#
+# [[redirects]]
+#   from = "https://paradisevalleydominica.com/*"
+#   to = "https://www.paradisevalleydominica.com/:splat"
+#   status = 301
+#   force = true
