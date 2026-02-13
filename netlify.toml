@@ -30,9 +30,3 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Redirect non-www to www
-[[redirects]]
-  from = "https://paradisevalleydominica.com/*"
-  to = "https://www.paradisevalleydominica.com/:splat"
-  status = 301
-  force = true
