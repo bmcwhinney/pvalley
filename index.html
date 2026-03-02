@@ -607,24 +607,16 @@
         }
 
         /* --- 13. RESPONSIVE --- */
+
+        /* Tablet (iPad portrait & landscape): 768px - 1024px */
         @media (max-width: 1024px) {
             :root { --spacing-section: 80px; }
-            .hero h1 { font-size: 3.5rem; }
-            .about-grid { gap: 3rem; }
-            .about-text h2 { font-size: 2.5rem; }
-        }
 
-        @media (max-width: 768px) {
-            :root { --spacing-section: 60px; }
-            
-            /* Mobile Logo Size */
-            .logo-img { height: 60px; }
-            nav.scrolled .logo-img { height: 45px; }
+            .logo-img { height: 80px; }
+            nav.scrolled .logo-img { height: 60px; }
 
-            /* Nav Mobile */
             .menu-toggle { display: block; }
 
-            /* Contact info in mobile nav */
             .nav-contact-info {
                 display: flex;
                 flex-direction: column;
@@ -640,7 +632,7 @@
                 align-items: center;
                 gap: 0.5rem;
                 color: rgba(255,255,255,0.5);
-                font-size: 0.7rem;
+                font-size: 0.75rem;
                 letter-spacing: 0.5px;
                 font-weight: 400;
                 text-transform: none;
@@ -655,7 +647,6 @@
                 color: var(--tropical-coral);
             }
 
-            /* Peacock in mobile nav */
             .nav-peacock {
                 display: block;
                 width: 100px;
@@ -666,15 +657,15 @@
                 object-fit: cover;
             }
 
-            /* Hide hamburger when menu is open, show the X close */
             .nav-links.active .menu-close { display: flex; }
             body.menu-open #menuBtn { opacity: 0; pointer-events: none; }
-            
+
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 80%;
+                width: 55%;
+                max-width: 400px;
                 height: 100vh;
                 height: 100dvh;
                 background: var(--forest-deep);
@@ -684,8 +675,46 @@
                 transition: 0.4s ease;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
-            
+
             .nav-links.active { right: 0; }
+
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.15rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-text h2 { font-size: 2.5rem; }
+            .about-img { order: -1; }
+            .about-img img { max-width: 80%; margin: 0 auto; }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+            .footer-about { grid-column: 1 / -1; text-align: center; }
+            .footer-about p { margin: 0 auto; }
+            .footer-logo { margin: 0 auto; }
+
+            .parallax-section { background-attachment: scroll; }
+            .parallax-section h2 { font-size: 2.5rem; }
+
+            .events-header-spacer { font-size: 2.25rem; }
+        }
+
+        /* Phone: 768px and below */
+        @media (max-width: 768px) {
+            :root { --spacing-section: 60px; }
+            
+            .logo-img { height: 60px; }
+            nav.scrolled .logo-img { height: 45px; }
+
+            .nav-links {
+                width: 80%;
+                max-width: none;
+            }
 
             .hero { text-align: left; padding: 0 1.5rem; align-items: center; padding-top: 40px; }
             .hero-eyebrow { font-size: 0.65rem; letter-spacing: 1.5px; margin-bottom: 0.75rem; }
@@ -694,22 +723,23 @@
             .hero p { font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
             .hero .btn { padding: 0.85rem 2rem; font-size: 0.75rem; }
 
-            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .about-text h2 { font-size: 2rem; }
             .about-text p { font-size: 0.95rem; }
-            .about-img { order: -1; margin-bottom: 1rem; }
-            .about-img img { box-shadow: 10px 10px 0 var(--mist); }
+            .about-img { margin-bottom: 1rem; }
+            .about-img img { box-shadow: 10px 10px 0 var(--mist); max-width: 100%; }
             
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
-            .footer-about p { margin: 0 auto; }
-            .footer-logo { margin: 0 auto; }
+            .footer-about { grid-column: auto; }
             .footer-col ul li { justify-content: center; }
             .footer-col ul { align-items: center; }
             
-            .parallax-section { background-attachment: scroll; padding: 5rem 0; }
+            .parallax-section { padding: 5rem 0; }
             .parallax-section h2 { font-size: 2rem; }
             
-            /* Events mobile: centered card layout */
             .events-list { text-align: center; }
             
             .event-item { 
