@@ -12,6 +12,12 @@ interface Props {
   decorRotate?: string;
   decorFlip?: boolean;
   decorPosition?: string;
+  decor2Image?: string;
+  decor2Width?: string;
+  decor2Opacity?: number;
+  decor2Rotate?: string;
+  decor2Flip?: boolean;
+  decor2Position?: string;
 }
 
 const {
@@ -21,14 +27,31 @@ const {
   buttonHref = '/visit',
   decorImage,
   decorWidth = 'clamp(130px, 20vw, 240px)',
-  decorOpacity = 0.13,
+  decorOpacity = 0.28,
   decorRotate = '0deg',
   decorFlip = false,
   decorPosition = 'top: 50%; right: -1.5rem; translate: 0 -50%;',
+  decor2Image,
+  decor2Width = 'clamp(130px, 20vw, 240px)',
+  decor2Opacity = 0.28,
+  decor2Rotate = '0deg',
+  decor2Flip = false,
+  decor2Position = 'top: 50%; left: -1.5rem; translate: 0 -50%;',
 } = Astro.props;
 ---
 
 <section class="cta-editorial section-rule">
+  {decor2Image && (
+    <Decor
+      image={decor2Image}
+      width={decor2Width}
+      opacity={decor2Opacity}
+      rotate={decor2Rotate}
+      flip={decor2Flip}
+      position={decor2Position}
+      hideMobile
+    />
+  )}
   {decorImage && (
     <Decor
       image={decorImage}
@@ -62,9 +85,12 @@ const {
     position: relative;
     z-index: 1;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    gap: clamp(1.5rem, 4vw, 3rem);
+    text-align: center;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    max-width: 44rem;
+    margin-inline: auto;
   }
 
   .cta-layout > div {
@@ -74,13 +100,13 @@ const {
   .cta-layout h2 {
     font-size: clamp(1.65rem, 3.5vw, 2.5rem);
     font-weight: 500;
-    margin-bottom: 0.75rem;
-    max-width: 16ch;
+    margin-bottom: 0.6rem;
+    text-wrap: balance;
   }
 
   .cta-layout p {
-    margin: 0;
-    max-width: 40ch;
+    margin: 0 auto;
+    max-width: 48ch;
     color: var(--forest-light);
     line-height: 1.7;
   }
@@ -90,15 +116,6 @@ const {
   }
 
   @media (max-width: 768px) {
-    .cta-layout {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .cta-layout h2 {
-      max-width: none;
-    }
-
     .cta-layout .btn {
       width: 100%;
       white-space: normal;

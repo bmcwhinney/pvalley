@@ -3,9 +3,9 @@ import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import site from '../data/site.json';
 
-const { visit, phone, phoneDisplay, email, address, hours, social, geo } = site;
-const mapUrl = `https://maps.google.com/?q=${encodeURIComponent(address.display)}`;
-const embedUrl = `https://maps.google.com/maps?q=${geo.latitude},${geo.longitude}&z=14&output=embed`;
+const { visit, phone, phoneDisplay, email, address, hours, social } = site;
+const mapUrl = 'https://www.google.com/maps/place/Paradise+Valley+Garden+Nursery/@15.5779925,-61.4233005,17z/data=!3m1!4b1!4m6!3m5!1s0x8c14c95aaaaf90a3:0x34dc7614b70f3cef!8m2!3d15.5779925!4d-61.4207256';
+const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent('Paradise Valley Garden Nursery, Borne, Dominica')}&z=16&output=embed`;
 ---
 
 <PageLayout

@@ -3,6 +3,9 @@
   "type": "module",
   "version": "2.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,8 +13,5 @@
   },
   "dependencies": {
     "astro": "^5.7.10"
-  },
-  "devDependencies": {
-    "playwright": "^1.61.1"
   }
 }

@@ -6,11 +6,11 @@ import Decor from '../components/Decor.astro';
 import site from '../data/site.json';
 
 const serviceImages = [
-  { src: '/images/estate-tree.jpg', alt: 'Ancient buttress-rooted tree on a garden trail' },
-  { src: '/images/garden-arch.jpg', alt: 'Flowering archway, a natural setting for ceremonies' },
-  { src: '/images/pval44.jpg', alt: 'Cultivated nursery grounds at Paradise Valley' },
-  { src: '/images/pvalley.jpg', alt: 'Tropical planting across the estate' },
-  { src: '/images/peacock-porch.jpg', alt: 'A resident peacock overlooking the grounds' },
+  { src: '/images/scenic-tours.jpg', alt: 'A rustic pergola and bell among lush tropical planting along a garden path at Paradise Valley' },
+  { src: '/images/weddings.jpg', alt: 'Guests celebrating a wedding at golden hour with mountain and sunset views at Paradise Valley' },
+  { src: '/images/landscaping-hardscaping.jpg', alt: 'Stone steps and dry-stone walls winding through flowering tropical gardens at Paradise Valley' },
+  { src: '/images/plant-variety.jpg', alt: 'Red anthuriums in bloom among ferns along a tropical garden trail at Paradise Valley' },
+  { src: '/images/gardening-supplies.jpg', alt: 'Terracotta and hand-painted pots, soil, fertilizer, and tools among flowering plants at Paradise Valley' },
   { src: '/images/peacock-perch.jpg', alt: 'A peacock among the lush estate foliage' },
 ];
 ---
@@ -31,7 +31,7 @@ const serviceImages = [
     <Decor
       image="/images/decor/lovebird.png"
       width="clamp(120px, 16vw, 200px)"
-      opacity={0.15}
+      opacity={0.32}
       rotate="3deg"
       position="top: 40%; right: 5%; translate: 0 -50%;"
       hideMobile
@@ -83,8 +83,13 @@ const serviceImages = [
     buttonHref="/visit"
     decorImage="/images/decor/peacock-fan.png"
     decorWidth="clamp(160px, 24vw, 260px)"
-    decorOpacity={0.16}
+    decorOpacity={0.32}
     decorPosition="top: 50%; right: 1%; translate: 0 -50%;"
+    decor2Image="/images/decor/flowers-blue.png"
+    decor2Width="clamp(140px, 20vw, 230px)"
+    decor2Opacity={0.34}
+    decor2Rotate="-4deg"
+    decor2Position="top: 50%; left: 1.5%; translate: 0 -50%;"
   />
 </PageLayout>
 
@@ -99,7 +104,9 @@ const serviceImages = [
   .intro-layout {
     position: relative;
     z-index: 1;
-    max-width: min(40rem, 100%);
+    max-width: min(46rem, 100%);
+    margin-inline: auto;
+    text-align: center;
   }
 
   .section-label {
@@ -113,17 +120,18 @@ const serviceImages = [
     font-size: clamp(1.6rem, 4.5vw, 2.75rem);
     font-weight: 500;
     margin: 0 0 1rem;
-    max-width: 18ch;
     overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
   .intro-copy {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 58ch;
     font-size: clamp(0.98rem, 2.2vw, 1.1rem);
     line-height: 1.75;
     color: var(--forest-light);
     overflow-wrap: break-word;
+    text-wrap: pretty;
   }
 
   .service-block {

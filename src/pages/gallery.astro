@@ -45,7 +45,6 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
                 <span class="gallery-category">{item.category}</span>
               </div>
             </button>
-            <figcaption>{item.alt}</figcaption>
           </figure>
         ))}
       </div>
@@ -67,8 +66,13 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     buttonHref="/visit"
     decorImage="/images/decor/peacock-fancy.png"
     decorWidth="clamp(150px, 22vw, 240px)"
-    decorOpacity={0.17}
+    decorOpacity={0.33}
     decorPosition="top: 50%; right: 1%; translate: 0 -50%;"
+    decor2Image="/images/decor/hibiscus.png"
+    decor2Width="clamp(130px, 18vw, 210px)"
+    decor2Opacity={0.34}
+    decor2Rotate="-5deg"
+    decor2Position="top: 50%; left: 1.5%; translate: 0 -50%;"
   />
 </PageLayout>
 
@@ -220,10 +224,4 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     font-weight: 600;
   }
 
-  figcaption {
-    margin-top: 0.75rem;
-    font-size: 0.84rem;
-    color: var(--forest-light);
-    line-height: 1.5;
-  }
 </style>

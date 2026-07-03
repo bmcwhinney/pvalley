@@ -13,8 +13,8 @@
     "display": "Borne, St. John, Dominica"
   },
   "geo": {
-    "latitude": 15.4168,
-    "longitude": -61.3710
+    "latitude": 15.5779925,
+    "longitude": -61.4207256
   },
   "hours": [
     { "days": "Mon – Fri", "time": "09:30 AM – 5:30 PM" },
@@ -113,7 +113,13 @@
     { "src": "/images/pvalley.jpg", "alt": "Aerial view of Paradise Valley botanical estate", "category": "Grounds" },
     { "src": "/images/peacock-porch.jpg", "alt": "Peacock perched on a garden verandah railing", "category": "Wildlife" },
     { "src": "/images/estate-tree.jpg", "alt": "Ancient buttress-rooted tree on the estate grounds", "category": "Grounds" },
-    { "src": "/images/jazzandarts.jpg", "alt": "Jazz and Arts festival at Paradise Valley", "category": "Events" },
+    { "src": "/images/jazzandarts.jpg", "alt": "Jazz and Arts festival at Paradise Valley", "category": "Jazz & Arts" },
+    { "src": "/images/events-banner.jpg", "alt": "Karifuna dancers performing in bright yellow costumes at a festival", "category": "Jazz & Arts" },
+    { "src": "/images/jazz-guest-tropical.jpg", "alt": "A guest in a vibrant tropical print dress laughing at the Jazz & Arts festival", "category": "Jazz & Arts" },
+    { "src": "/images/jazz-live-painting.jpg", "alt": "An artist creating a colourful live painting at the Jazz & Arts festival", "category": "Jazz & Arts" },
+    { "src": "/images/jazz-arts-sign.jpg", "alt": "A guest beside the hand-painted Jazz 'n Arts in Paradise Valley sign", "category": "Jazz & Arts" },
+    { "src": "/images/jazz-coconut.jpg", "alt": "A festival-goer enjoying a fresh coconut among the crowd", "category": "Jazz & Arts" },
+    { "src": "/images/jazz-kids-swings.jpg", "alt": "Children in bright madras prints playing on the garden swings", "category": "Jazz & Arts" },
     { "src": "/images/peacock-cannon.jpg", "alt": "Peacock atop a historic estate cannon among red blooms", "category": "Wildlife" },
     { "src": "/images/pval44.jpg", "alt": "Lush nursery grounds at Paradise Valley", "category": "Grounds" },
     { "src": "/images/peacock-roots.jpg", "alt": "Peacock resting in the shade of a mango tree", "category": "Wildlife" },
@@ -128,15 +134,15 @@
     "sections": [
       {
         "title": "A Living Masterpiece",
-        "content": "Welcome to Paradise Valley Garden & Nursery, a sanctuary rooted in the fertile volcanic soil of Borne, St. John. More than just a nursery, we are a destination where nature, history, and community converge on the Nature Island.",
+        "content": "Nestled amidst Dominica's breathtaking natural beauty, Paradise Valley offers an experience that transcends the ordinary. Our venue is more than a setting; it's a canvas for your dreams, where stunning panoramic vistas and the island's enchanting ambiance create an atmosphere of pure magic. Whether you're exchanging vows in an intimate ceremony or celebrating a milestone event with loved ones, our dedicated team is committed to curating an affair that is as unique and unforgettable as the island itself.",
         "image": "/images/garden-arch.jpg",
         "imageAlt": "Flowering archway framing the tropical gardens at Paradise Valley"
       },
       {
         "title": "Heritage & Wildlife",
         "content": "Home to vibrant resident peacocks, roaming donkeys, and historic estate artifacts, our grounds offer a glimpse into Dominica's rich heritage. Wander through pathways lined with endemic palms, discover riverside trails, and encounter the wildlife that calls our gardens home.",
-        "image": "/images/peacock-cannon.jpg",
-        "imageAlt": "Peacock atop a historic estate cannon among red blooms"
+        "image": "/images/donkeys.jpg",
+        "imageAlt": "Resident donkeys roaming the grounds at Paradise Valley"
       },
       {
         "title": "Committed to Conservation",
@@ -146,10 +152,10 @@
       }
     ],
     "values": [
-      { "title": "Biodiversity", "description": "Protecting and propagating rare endemic species across our 60-acre estate." },
-      { "title": "Community", "description": "Supporting local artisans, gardeners, and the Dominican economy." },
-      { "title": "Education", "description": "Sharing knowledge about sustainable tropical gardening practices." },
-      { "title": "Experience", "description": "Creating unforgettable moments for visitors, couples, and families." }
+      { "title": "Biodiversity", "icon": "leaf", "description": "Every corner of our 60 acres is alive. We protect and lovingly propagate the rare, endemic species that make this island so extraordinary." },
+      { "title": "Community", "icon": "users", "description": "We grow alongside our neighbours, championing local artisans, gardeners, and the makers who keep Dominica's spirit thriving." },
+      { "title": "Education", "icon": "book-open", "description": "We love to share what we know, from sustainable growing to the stories rooted in every plant and pathway." },
+      { "title": "Experience", "icon": "sparkles", "description": "A quiet morning walk, a wedding at golden hour, a child's first peacock. We craft moments worth remembering." }
     ]
   },
   "visit": {
@@ -158,7 +164,7 @@
       "title": "Come Experience Paradise",
       "subtitle": "We're open seven days a week in the heart of Borne, St. John."
     },
-    "directions": "Paradise Valley is located in Borne, St. John Parish, on Dominica's Nature Island. Follow signs from the main road — our entrance is well-marked. Allow approximately 30 minutes from Roseau.",
+    "directions": "Paradise Valley is located in Borne, St. John Parish, on Dominica's Nature Island. Follow signs from the main road — our entrance is well-marked.",
     "tips": [
       "Wear comfortable walking shoes for garden tours",
       "Bring sunscreen and water — Dominica's sun is strong",

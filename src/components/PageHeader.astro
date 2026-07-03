@@ -36,6 +36,7 @@ const crumbs = [
     position: relative;
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     min-height: clamp(240px, 42vh, 420px);
     padding: calc(var(--nav-height) + 1.5rem) 0 clamp(2rem, 4vw, 3rem);
     overflow: hidden;
@@ -60,6 +61,12 @@ const crumbs = [
     color: var(--white);
     max-width: min(40rem, 100%);
     min-width: 0;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .page-header :global(.breadcrumbs) {
+    justify-content: center;
   }
 
   .page-header h1 {
@@ -75,7 +82,7 @@ const crumbs = [
   .page-header-subtitle {
     color: rgba(255, 255, 255, 0.82);
     font-size: clamp(0.95rem, 2.2vw, 1.05rem);
-    margin: 0;
+    margin: 0 auto;
     line-height: 1.7;
     max-width: min(42ch, 100%);
     overflow-wrap: break-word;
