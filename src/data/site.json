@@ -1,0 +1,169 @@
+{
+  "name": "Paradise Valley Garden & Nursery",
+  "tagline": "Dominica's Botanical Sanctuary",
+  "url": "https://www.paradisevalleydominica.com",
+  "phone": "+1-767-277-4671",
+  "phoneDisplay": "+1 (767) 277-4671",
+  "email": "info@paradisevalleydominica.com",
+  "address": {
+    "street": "Borne",
+    "locality": "St. John",
+    "region": "St. John Parish",
+    "country": "DM",
+    "display": "Borne, St. John, Dominica"
+  },
+  "geo": {
+    "latitude": 15.4168,
+    "longitude": -61.3710
+  },
+  "hours": [
+    { "days": "Mon – Fri", "time": "09:30 AM – 5:30 PM" },
+    { "days": "Sat – Sun", "time": "10:00 AM – 6:00 PM" }
+  ],
+  "social": {
+    "instagram": "https://www.instagram.com/p.aradise_v.alley?igsh=MWtwOHV2dWZsZ3duMw=="
+  },
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Events", "href": "/events" },
+    { "label": "Gallery", "href": "/gallery" },
+    { "label": "Visit", "href": "/visit", "cta": true }
+  ],
+  "footerNav": [
+    { "label": "About Us", "href": "/about" },
+    { "label": "Our Services", "href": "/services" },
+    { "label": "Events", "href": "/events" },
+    { "label": "Gallery", "href": "/gallery" },
+    { "label": "Plan Your Visit", "href": "/visit" }
+  ],
+  "stats": [
+    { "value": "60", "suffix": "acres", "label": "Botanical estate" },
+    { "value": "6+", "suffix": "", "label": "Core services" },
+    { "value": "1", "suffix": "", "label": "Annual jazz festival" },
+    { "value": "Open", "suffix": "", "label": "Seven days a week" }
+  ],
+  "services": [
+    {
+      "slug": "scenic-tours",
+      "icon": "camera",
+      "title": "Scenic Tours",
+      "description": "Guided botanical journeys through 60 acres of flora, historic ruins, and serene riverside trails.",
+      "details": "Walk beneath towering palms, discover hidden riverside paths, and explore historic estate ruins with knowledgeable guides who bring Dominica's botanical heritage to life. Perfect for families, photographers, and nature lovers.",
+      "features": ["Guided botanical walks", "Historic estate ruins", "Riverside trail access", "Photography-friendly routes"]
+    },
+    {
+      "slug": "weddings-events",
+      "icon": "heart",
+      "title": "Weddings & Events",
+      "description": "Host your special day amidst our lush, botanical paradise. A breathtaking backdrop for memories.",
+      "details": "From intimate ceremonies beneath the canopy to grand celebrations on our landscaped grounds, Paradise Valley offers an unforgettable setting. Our team works with you to create a magical experience surrounded by tropical beauty.",
+      "features": ["Outdoor ceremony spaces", "Reception areas", "Botanical backdrops", "Event coordination support"]
+    },
+    {
+      "slug": "landscaping",
+      "icon": "layers",
+      "title": "Landscaping & Hardscaping",
+      "description": "Expert consultation and design to transform your space into a tropical haven, featuring custom hardscapes.",
+      "details": "Our landscape architects understand the Caribbean climate intimately. We design and build gardens, patios, pathways, and water features that thrive in Dominica's unique volcanic soil and tropical conditions.",
+      "features": ["Garden design consultation", "Custom hardscaping", "Tropical planting plans", "Ongoing maintenance advice"]
+    },
+    {
+      "slug": "plant-variety",
+      "icon": "sun",
+      "title": "Plant Variety",
+      "description": "From rare Anthuriums to citrus and mango fruit trees, we stock plants tailored to the Caribbean climate.",
+      "details": "Our nursery specializes in species that flourish in Dominica's climate — including the rare Anthurium dominicense, exotic tropicals, citrus trees, mango varieties, and endemic palms propagated on-site.",
+      "features": ["Rare Anthurium dominicense", "Citrus & mango trees", "Endemic palms", "Exotic tropicals"]
+    },
+    {
+      "slug": "gardening-supplies",
+      "icon": "tool",
+      "title": "Gardening Supplies",
+      "description": "High-quality soil, organic fertilizers, pots, and professional tools for every green thumb.",
+      "details": "Everything you need to cultivate a thriving garden — premium volcanic soil blends, organic fertilizers formulated for tropical plants, quality pots, and professional-grade tools sourced for Caribbean gardeners.",
+      "features": ["Volcanic soil blends", "Organic fertilizers", "Pots & planters", "Professional tools"]
+    },
+    {
+      "slug": "plant-care",
+      "icon": "book-open",
+      "title": "Plant Care",
+      "description": "Valuable resources and guidance to help you maintain healthy, vibrant plants.",
+      "details": "Our horticultural experts share practical knowledge tailored to Dominica's climate — watering schedules, pest management, pruning techniques, and seasonal care tips to keep your garden flourishing year-round.",
+      "features": ["Expert consultations", "Seasonal care guides", "Pest management advice", "Propagation workshops"]
+    }
+  ],
+  "events": [
+    {
+      "slug": "jazz-arts-2027",
+      "day": "",
+      "month": "May",
+      "year": "2027",
+      "title": "Paradise Valley Jazz & Arts 2027",
+      "description": "An unforgettable celebration of live jazz, local art, and the natural beauty of Dominica's botanical heartland.",
+      "longDescription": "Join us for a day of world-class jazz performances set against the stunning backdrop of our 60-acre botanical estate. Local artists showcase their work, food vendors serve island favorites, and the gardens come alive with music, culture, and community spirit.",
+      "image": "/images/jazzandarts.jpg",
+      "highlights": ["Live jazz performances", "Local art exhibitions", "Island food vendors", "Garden tours included"]
+    }
+  ],
+  "gallery": [
+    { "src": "/images/peacock-perch.jpg", "alt": "A resident peacock in full plumage among the tropical foliage", "category": "Wildlife" },
+    { "src": "/images/garden-arch.jpg", "alt": "Flowering archway framing the tropical gardens", "category": "Flora" },
+    { "src": "/images/pvalley.jpg", "alt": "Aerial view of Paradise Valley botanical estate", "category": "Grounds" },
+    { "src": "/images/peacock-porch.jpg", "alt": "Peacock perched on a garden verandah railing", "category": "Wildlife" },
+    { "src": "/images/estate-tree.jpg", "alt": "Ancient buttress-rooted tree on the estate grounds", "category": "Grounds" },
+    { "src": "/images/jazzandarts.jpg", "alt": "Jazz and Arts festival at Paradise Valley", "category": "Events" },
+    { "src": "/images/peacock-cannon.jpg", "alt": "Peacock atop a historic estate cannon among red blooms", "category": "Wildlife" },
+    { "src": "/images/pval44.jpg", "alt": "Lush nursery grounds at Paradise Valley", "category": "Grounds" },
+    { "src": "/images/peacock-roots.jpg", "alt": "Peacock resting in the shade of a mango tree", "category": "Wildlife" },
+    { "src": "/images/donkeys.jpg", "alt": "Resident donkeys on the estate grounds after the rain", "category": "Wildlife" }
+  ],
+  "about": {
+    "hero": {
+      "eyebrow": "Our Story",
+      "title": "Cultivating Nature in Borne",
+      "subtitle": "A 60-acre sanctuary where Dominica's botanical heritage comes alive."
+    },
+    "sections": [
+      {
+        "title": "A Living Masterpiece",
+        "content": "Welcome to Paradise Valley Garden & Nursery, a sanctuary rooted in the fertile volcanic soil of Borne, St. John. More than just a nursery, we are a destination where nature, history, and community converge on the Nature Island.",
+        "image": "/images/garden-arch.jpg",
+        "imageAlt": "Flowering archway framing the tropical gardens at Paradise Valley"
+      },
+      {
+        "title": "Heritage & Wildlife",
+        "content": "Home to vibrant resident peacocks, roaming donkeys, and historic estate artifacts, our grounds offer a glimpse into Dominica's rich heritage. Wander through pathways lined with endemic palms, discover riverside trails, and encounter the wildlife that calls our gardens home.",
+        "image": "/images/peacock-cannon.jpg",
+        "imageAlt": "Peacock atop a historic estate cannon among red blooms"
+      },
+      {
+        "title": "Committed to Conservation",
+        "content": "We are dedicated to sustainability, propagating rare Anthurium dominicense and exotic tropicals that thrive in our unique island climate. Every plant we grow supports local biodiversity and the Dominican economy.",
+        "image": "/images/estate-tree.jpg",
+        "imageAlt": "Ancient buttress-rooted tree on the Paradise Valley estate"
+      }
+    ],
+    "values": [
+      { "title": "Biodiversity", "description": "Protecting and propagating rare endemic species across our 60-acre estate." },
+      { "title": "Community", "description": "Supporting local artisans, gardeners, and the Dominican economy." },
+      { "title": "Education", "description": "Sharing knowledge about sustainable tropical gardening practices." },
+      { "title": "Experience", "description": "Creating unforgettable moments for visitors, couples, and families." }
+    ]
+  },
+  "visit": {
+    "hero": {
+      "eyebrow": "Plan Your Visit",
+      "title": "Come Experience Paradise",
+      "subtitle": "We're open seven days a week in the heart of Borne, St. John."
+    },
+    "directions": "Paradise Valley is located in Borne, St. John Parish, on Dominica's Nature Island. Follow signs from the main road — our entrance is well-marked. Allow approximately 30 minutes from Roseau.",
+    "tips": [
+      "Wear comfortable walking shoes for garden tours",
+      "Bring sunscreen and water — Dominica's sun is strong",
+      "Cameras welcome — our grounds are photographer-friendly",
+      "Peacocks roam freely — please admire from a respectful distance"
+    ]
+  }
+}

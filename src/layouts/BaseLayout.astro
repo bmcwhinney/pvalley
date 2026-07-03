@@ -1,0 +1,101 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import site from '../data/site.json';
+import '../styles/global.css';
+import '../styles/editorial.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image = '/images/pvsocialshare.png' } = Astro.props;
+
+const { name, url, email, phone, address, geo } = site;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = title === name ? `${name} | Botanical Garden & Nursery in Dominica` : `${title} | ${name}`;
+const pageDescription = description ?? `Discover ${name} — a 60-acre botanical sanctuary in Borne, Dominica.`;
+const ogImage = image.startsWith('http') ? image : `${url}${image}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={pageDescription} />
+  <meta name="keywords" content="Paradise Valley Garden, nursery Dominica, botanical garden Dominica, Borne Dominica, scenic tours Dominica, wedding venue Dominica, Anthurium dominicense, tropical plants Caribbean, landscaping Dominica, Jazz and Arts Dominica" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content={name} />
+  <meta name="theme-color" content="#14362c" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <meta name="geo.region" content="DM-06" />
+  <meta name="geo.placename" content={address.display} />
+  <meta name="geo.position" content={`${geo.latitude};${geo.longitude}`} />
+  <meta name="ICBM" content={`${geo.latitude}, ${geo.longitude}`} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={name} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content={`${name} — lush botanical gardens in Dominica`} />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <title>{pageTitle}</title>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${url}/#website`,
+        "url": url,
+        "name": name,
+        "publisher": { "@id": `${url}/#organization` },
+        "inLanguage": "en"
+      },
+      {
+        "@type": ["LocalBusiness", "GardenStore", "TouristAttraction"],
+        "@id": `${url}/#organization`,
+        "name": name,
+        "url": url,
+        "logo": `${url}/images/logo.png`,
+        "telephone": phone,
+        "email": email,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": address.street,
+          "addressLocality": address.locality,
+          "addressRegion": address.region,
+          "addressCountry": address.country
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": geo.latitude,
+          "longitude": geo.longitude
+        },
+        "sameAs": ["https://www.instagram.com/p.aradise_v.alley"]
+      }
+    ]
+  })} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <ViewTransitions />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <slot />
+  <script src="/scripts/main.js" defer></script>
+</body>
+</html>

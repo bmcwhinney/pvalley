@@ -1,0 +1,31 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import HomeMasthead from '../components/HomeMasthead.astro';
+import HomeAboutPreview from '../components/HomeAboutPreview.astro';
+import HomeServicesPreview from '../components/HomeServicesPreview.astro';
+import Sustainability from '../components/Sustainability.astro';
+import HomeEventPreview from '../components/HomeEventPreview.astro';
+import CTABanner from '../components/CTABanner.astro';
+import site from '../data/site.json';
+---
+
+<PageLayout
+  title={site.name}
+  description="Discover Paradise Valley Garden & Nursery — a 60-acre botanical sanctuary in Borne, Dominica offering scenic tours, weddings, rare tropical plants, and the annual Jazz & Arts festival."
+  variant="home"
+  image="/images/pvalley.jpg"
+>
+  <Hero />
+  <HomeMasthead />
+  <HomeAboutPreview />
+  <HomeServicesPreview />
+  <Sustainability />
+  <HomeEventPreview />
+  <CTABanner
+    decorImage="/images/decor/tree.png"
+    decorWidth="clamp(150px, 22vw, 260px)"
+    decorOpacity={0.45}
+    decorPosition="top: 50%; right: 2%; translate: 0 -50%;"
+  />
+</PageLayout>

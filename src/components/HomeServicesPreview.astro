@@ -1,0 +1,158 @@
+---
+import site from '../data/site.json';
+import Decor from './Decor.astro';
+const previewServices = site.services.slice(0, 4);
+---
+
+<section class="section-editorial bg-mist section-rule services-section">
+  <Decor
+    image="/images/decor/flowers-blue.png"
+    width="clamp(140px, 18vw, 230px)"
+    opacity={0.2}
+    position="top: 0; right: 0;"
+    hideMobile
+  />
+  <div class="container-wide services-inner">
+    <header class="services-head">
+      <p class="section-label">What we do</p>
+      <h2>Gardens, gatherings, and green expertise</h2>
+      <p class="services-intro">From guided walks through the estate to plants grown for Caribbean gardens — everything we offer starts on these sixty acres.</p>
+    </header>
+
+    <div class="services-grid">
+      {previewServices.map((service, i) => (
+        <article class="service-card">
+          <span class="service-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="services-foot">
+      <a href="/services" class="btn">Explore all services</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+  }
+
+  .services-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .services-head {
+    max-width: min(36rem, 100%);
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .section-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--leaf);
+  }
+
+  .services-head h2 {
+    font-size: clamp(1.65rem, 4vw, 2.75rem);
+    font-weight: 500;
+    margin: 0 0 1rem;
+    max-width: 16ch;
+  }
+
+  .services-intro {
+    margin: 0;
+    font-size: clamp(0.98rem, 2vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--forest-light);
+    max-width: 42ch;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(18, 71, 52, 0.12);
+    border: 1px solid rgba(18, 71, 52, 0.12);
+  }
+
+  .service-card {
+    background: var(--cream);
+    padding: clamp(1.35rem, 3.5vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    min-width: 0;
+    transition: background var(--transition);
+  }
+
+  @media (hover: hover) {
+    .service-card:hover {
+      background: #ffffff;
+    }
+  }
+
+  .service-num {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--tropical-coral);
+  }
+
+  .service-card h3 {
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    font-weight: 500;
+    margin: 0;
+    color: var(--forest-deep);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .service-card p {
+    margin: 0;
+    font-size: clamp(0.92rem, 1.8vw, 0.98rem);
+    line-height: 1.7;
+    color: var(--forest-light);
+    overflow-wrap: break-word;
+  }
+
+  .services-foot {
+    margin-top: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  /* Tablet: still two columns, but keep cards readable */
+  @media (max-width: 900px) {
+    .services-head h2 {
+      max-width: none;
+    }
+  }
+
+  /* Phone / small tablet: single column */
+  @media (max-width: 640px) {
+    .services-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .services-foot .btn {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+  }
+
+  /* Very small phones */
+  @media (max-width: 380px) {
+    .service-card {
+      padding: 1.25rem;
+    }
+  }
+</style>

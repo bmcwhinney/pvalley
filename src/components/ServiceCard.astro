@@ -1,0 +1,144 @@
+---
+import { serviceIcons } from '../utils/icons';
+
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  details?: string;
+  features?: string[];
+  compact?: boolean;
+  delay?: number;
+}
+
+const { icon, title, description, details, features, compact = false, delay = 1 } = Astro.props;
+const iconPath = serviceIcons[icon] ?? '';
+---
+
+<article class:list={['service-card', { 'service-card--compact': compact, [`reveal reveal-delay-${delay}`]: true }]}>
+  <div class="icon-box">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={iconPath} />
+  </div>
+  <h3>{title}</h3>
+  <p class="service-desc">{description}</p>
+  {details && <p class="service-details">{details}</p>}
+  {features && features.length > 0 && (
+    <ul class="service-features">
+      {features.map((feature) => (
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          {feature}
+        </li>
+      ))}
+    </ul>
+  )}
+</article>
+
+<style>
+  .service-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      border-color var(--transition);
+    border: 1px solid rgba(20, 54, 44, 0.06);
+    border-radius: var(--radius-lg);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--leaf), var(--tropical-coral), var(--tropical-gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card--compact {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(217, 108, 85, 0.2);
+  }
+
+  .icon-box {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(45, 106, 79, 0.1), rgba(224, 122, 95, 0.1));
+    border-radius: var(--radius-full);
+    color: var(--leaf);
+    transition: background var(--transition), transform var(--transition), color var(--transition);
+  }
+
+  .service-card:hover .icon-box {
+    background: linear-gradient(145deg, rgba(45, 106, 79, 0.16), rgba(224, 122, 95, 0.14));
+    transform: scale(1.05);
+    color: var(--tropical-coral);
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.93rem;
+    margin-bottom: 0;
+    line-height: 1.7;
+    color: var(--forest-medium);
+  }
+
+  .service-details {
+    font-size: 0.88rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    line-height: 1.75;
+    color: var(--forest-light);
+    text-align: left;
+  }
+
+  .service-features {
+    margin-top: 1.25rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--mist-dark);
+  }
+
+  .service-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    color: var(--forest-medium);
+    line-height: 1.5;
+  }
+
+  .service-features svg {
+    flex-shrink: 0;
+    color: var(--tropical-coral);
+    margin-top: 3px;
+  }
+</style>

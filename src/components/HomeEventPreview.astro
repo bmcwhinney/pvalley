@@ -1,0 +1,71 @@
+---
+import site from '../data/site.json';
+const event = site.events[0];
+---
+
+<section class="section-editorial section-rule">
+  <div class="container-wide event-layout">
+    <figure class="event-figure">
+      <img src={event.image} alt={event.title} loading="lazy" decoding="async" width="1000" height="700" />
+    </figure>
+    <div class="event-copy">
+      <p class="section-label">Coming up</p>
+      <p class="event-date">{event.day ? `${event.month} ${event.day}, ${event.year}` : `${event.month} ${event.year}`}</p>
+      <h2>{event.title}</h2>
+      <p>{event.description}</p>
+      <a href="/events" class="text-link">Event details</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .event-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .event-figure {
+    margin: 0;
+  }
+
+  .event-figure img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .section-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--leaf);
+  }
+
+  .event-date {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--tropical-coral);
+  }
+
+  .event-copy h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    max-width: 16ch;
+  }
+
+  .event-copy > p:not(.section-label):not(.event-date) {
+    max-width: 40ch;
+    margin-bottom: 1.75rem;
+  }
+
+  @media (max-width: 900px) {
+    .event-layout { grid-template-columns: minmax(0, 1fr); }
+    .event-figure { order: -1; }
+    .event-copy h2 { max-width: none; }
+  }
+</style>

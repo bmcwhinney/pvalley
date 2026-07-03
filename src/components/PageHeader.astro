@@ -1,0 +1,90 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  image?: string;
+  breadcrumbLabel?: string;
+}
+
+const {
+  title,
+  subtitle,
+  image = '/images/pvalley.jpg',
+  breadcrumbLabel,
+} = Astro.props;
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: breadcrumbLabel ?? title },
+];
+---
+
+<header class="page-header">
+  <div class="page-header-bg" style={`background-image: url('${image}')`} aria-hidden="true"></div>
+  <div class="page-header-vignette" aria-hidden="true"></div>
+  <div class="container-wide page-header-content">
+    <Breadcrumbs items={crumbs} />
+    <h1>{title}</h1>
+    {subtitle && <p class="page-header-subtitle">{subtitle}</p>}
+  </div>
+</header>
+
+<style>
+  .page-header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(240px, 42vh, 420px);
+    padding: calc(var(--nav-height) + 1.5rem) 0 clamp(2rem, 4vw, 3rem);
+    overflow: hidden;
+  }
+
+  .page-header-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 35%;
+  }
+
+  .page-header-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(12, 40, 30, 0.9) 0%, rgba(12, 40, 30, 0.45) 100%);
+  }
+
+  .page-header-content {
+    position: relative;
+    z-index: 1;
+    color: var(--white);
+    max-width: min(40rem, 100%);
+    min-width: 0;
+  }
+
+  .page-header h1 {
+    color: var(--white);
+    font-size: clamp(1.85rem, 6vw, 3.5rem);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .page-header-subtitle {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+    margin: 0;
+    line-height: 1.7;
+    max-width: min(42ch, 100%);
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 480px) {
+    .page-header {
+      min-height: 220px;
+      padding-bottom: 1.75rem;
+    }
+  }
+</style>

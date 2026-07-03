@@ -1,0 +1,298 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Decor from '../components/Decor.astro';
+import site from '../data/site.json';
+
+const serviceImages = [
+  { src: '/images/estate-tree.jpg', alt: 'Ancient buttress-rooted tree on a garden trail' },
+  { src: '/images/garden-arch.jpg', alt: 'Flowering archway, a natural setting for ceremonies' },
+  { src: '/images/pval44.jpg', alt: 'Cultivated nursery grounds at Paradise Valley' },
+  { src: '/images/pvalley.jpg', alt: 'Tropical planting across the estate' },
+  { src: '/images/peacock-porch.jpg', alt: 'A resident peacock overlooking the grounds' },
+  { src: '/images/peacock-perch.jpg', alt: 'A peacock among the lush estate foliage' },
+];
+---
+
+<PageLayout
+  title="Our Services"
+  description="Scenic botanical tours, weddings & events, landscaping, tropical plant nursery, gardening supplies, and expert plant care at Paradise Valley Garden & Nursery, Dominica."
+  image="/images/pvalley.jpg"
+>
+  <PageHeader
+    title="Our services"
+    subtitle="Scenic tours, weddings and events, landscaping, nursery plants, gardening supplies, and plant care from our estate in Borne."
+    image="/images/pvalley.jpg"
+    breadcrumbLabel="Services"
+  />
+
+  <section class="services-intro section-editorial">
+    <Decor
+      image="/images/decor/lovebird.png"
+      width="clamp(120px, 16vw, 200px)"
+      opacity={0.15}
+      rotate="3deg"
+      position="top: 40%; right: 5%; translate: 0 -50%;"
+      hideMobile
+    />
+    <div class="container-wide intro-layout">
+      <p class="section-label">What we offer</p>
+      <h2>From guided walks to garden design</h2>
+      <p class="intro-copy">Explore the grounds on a scenic tour, host a wedding or gathering among the palms, bring home tropical plants and supplies, or get help designing and caring for your own garden. Every service below is rooted in these sixty acres.</p>
+    </div>
+  </section>
+
+  {site.services.map((service, i) => {
+    const image = serviceImages[i % serviceImages.length];
+    const reversed = i % 2 === 1;
+
+    return (
+      <section class:list={['service-block', { 'service-block--mist': i % 2 === 1 }, { 'service-block--reverse': reversed }]}>
+        <div class="container-wide service-layout">
+          <div class="service-copy">
+            <span class="service-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{service.title}</h2>
+            <p class="service-lead">{service.description}</p>
+            <p class="service-body">{service.details}</p>
+            {service.features && (
+              <p class="service-tags">
+                {service.features.join(' · ')}
+              </p>
+            )}
+          </div>
+          <figure class="service-figure">
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              decoding="async"
+              width="900"
+              height="700"
+            />
+          </figure>
+        </div>
+      </section>
+    );
+  })}
+
+  <CTABanner
+    title="Come see for yourself"
+    description="The best way to choose is to walk the grounds. We're open seven days a week in Borne."
+    buttonText="Plan your visit"
+    buttonHref="/visit"
+    decorImage="/images/decor/peacock-fan.png"
+    decorWidth="clamp(160px, 24vw, 260px)"
+    decorOpacity={0.16}
+    decorPosition="top: 50%; right: 1%; translate: 0 -50%;"
+  />
+</PageLayout>
+
+<style>
+  .services-intro {
+    padding-bottom: clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+  }
+
+  .intro-layout {
+    position: relative;
+    z-index: 1;
+    max-width: min(40rem, 100%);
+  }
+
+  .section-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--leaf);
+  }
+
+  .intro-layout h2 {
+    font-size: clamp(1.6rem, 4.5vw, 2.75rem);
+    font-weight: 500;
+    margin: 0 0 1rem;
+    max-width: 18ch;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .intro-copy {
+    margin: 0;
+    font-size: clamp(0.98rem, 2.2vw, 1.1rem);
+    line-height: 1.75;
+    color: var(--forest-light);
+    overflow-wrap: break-word;
+  }
+
+  .service-block {
+    padding: clamp(2rem, 6vw, 4.5rem) 0;
+    border-top: 1px solid rgba(18, 71, 52, 0.1);
+    overflow-x: clip;
+  }
+
+  .service-block--mist {
+    background: var(--mist);
+  }
+
+  .service-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(1.5rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  .service-block--reverse .service-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+
+  .service-block--reverse .service-copy {
+    order: 2;
+  }
+
+  .service-block--reverse .service-figure {
+    order: 1;
+  }
+
+  .service-copy,
+  .service-figure {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .service-num {
+    display: block;
+    margin-bottom: 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 5vw, 3.25rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--tropical-coral);
+  }
+
+  .service-copy h2 {
+    font-size: clamp(1.4rem, 3.8vw, 2.35rem);
+    font-weight: 500;
+    margin: 0 0 0.85rem;
+    max-width: 14ch;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .service-lead {
+    margin: 0 0 0.9rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--forest-deep);
+    max-width: 36ch;
+    overflow-wrap: break-word;
+  }
+
+  .service-body {
+    margin: 0 0 1.1rem;
+    font-size: clamp(0.95rem, 1.8vw, 1rem);
+    line-height: 1.75;
+    color: var(--forest-medium);
+    max-width: 44ch;
+    overflow-wrap: break-word;
+  }
+
+  .service-tags {
+    margin: 0;
+    font-size: clamp(0.82rem, 1.6vw, 0.88rem);
+    line-height: 1.65;
+    color: var(--forest-light);
+    max-width: 42ch;
+    overflow-wrap: break-word;
+  }
+
+  .service-figure {
+    margin: 0;
+    width: 100%;
+  }
+
+  .service-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+  }
+
+  /* Large tablet: still two columns, slightly tighter type */
+  @media (max-width: 1100px) and (min-width: 901px) {
+    .service-layout,
+    .service-block--reverse .service-layout {
+      gap: 2rem;
+    }
+
+    .service-copy h2,
+    .service-lead,
+    .service-body,
+    .service-tags {
+      max-width: none;
+    }
+  }
+
+  /* Tablet & phone: single column, image first */
+  @media (max-width: 900px) {
+    .intro-layout h2 {
+      max-width: none;
+    }
+
+    .service-layout,
+    .service-block--reverse .service-layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.35rem;
+    }
+
+    .service-block--reverse .service-copy,
+    .service-block--reverse .service-figure {
+      order: unset;
+    }
+
+    .service-figure {
+      order: -1;
+    }
+
+    .service-copy h2,
+    .service-lead,
+    .service-body,
+    .service-tags {
+      max-width: none;
+    }
+
+    .service-figure img {
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* Small phones */
+  @media (max-width: 480px) {
+    .service-block {
+      padding: 1.75rem 0;
+    }
+
+    .service-figure img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  /* Short landscape phones / small height */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .service-block {
+      padding: 1.5rem 0;
+    }
+
+    .service-figure img {
+      aspect-ratio: 21 / 9;
+      max-height: 220px;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+interface Props {
+  image: string;
+  width?: string;
+  opacity?: number;
+  rotate?: string;
+  flip?: boolean;
+  position?: string;
+  hideMobile?: boolean;
+  class?: string;
+}
+
+const {
+  image,
+  width = 'clamp(90px, 12vw, 160px)',
+  opacity = 0.12,
+  rotate = '0deg',
+  flip = false,
+  position = 'top: 0; right: 0;',
+  hideMobile = false,
+  class: className = '',
+} = Astro.props;
+
+const style = [
+  `--decor-w: ${width}`,
+  `--decor-o: ${opacity}`,
+  `--decor-r: ${rotate}`,
+  `--decor-f: ${flip ? -1 : 1}`,
+  position,
+].join('; ');
+---
+
+<img
+  src={image}
+  alt=""
+  aria-hidden="true"
+  role="presentation"
+  loading="lazy"
+  decoding="async"
+  draggable="false"
+  class:list={['decor', { 'decor--hide-mobile': hideMobile }, className]}
+  style={style}
+/>
+
+<style>
+  .decor {
+    position: absolute;
+    z-index: 0;
+    width: var(--decor-w);
+    max-width: 45%;
+    height: auto;
+    opacity: var(--decor-o);
+    transform: rotate(var(--decor-r)) scaleX(var(--decor-f));
+    transform-origin: center;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: saturate(0.85);
+  }
+
+  /* Dim further on phones so accents stay whisper-quiet */
+  @media (max-width: 600px) {
+    .decor {
+      opacity: calc(var(--decor-o) * 0.65);
+      max-width: 38%;
+    }
+
+    .decor--hide-mobile {
+      display: none;
+    }
+  }
+</style>

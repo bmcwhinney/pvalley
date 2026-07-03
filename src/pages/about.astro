@@ -1,0 +1,159 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Decor from '../components/Decor.astro';
+import site from '../data/site.json';
+
+const { about } = site;
+---
+
+<PageLayout
+  title="About Us"
+  description="Learn about Paradise Valley Garden & Nursery — a 60-acre botanical sanctuary in Borne, Dominica with rare Anthuriums, resident peacocks, and a commitment to sustainability."
+  image="/images/pval44.jpg"
+>
+  <PageHeader
+    title={about.hero.title}
+    subtitle={about.hero.subtitle}
+    image="/images/pval44.jpg"
+  />
+
+  {about.sections.map((section, i) => (
+    <section class:list={['section-editorial section-rule', { 'bg-mist': i % 2 === 1 }]}>
+      {i === 0 && (
+        <Decor
+          image="/images/decor/hibiscus.png"
+          width="clamp(110px, 14vw, 185px)"
+          opacity={0.16}
+          rotate="-6deg"
+          position="bottom: 7%; left: -1.25rem;"
+          hideMobile
+        />
+      )}
+      <div class:list={['container-wide', 'content-grid', { 'content-grid--reverse': i % 2 === 1 }]}>
+        <div>
+          <h2>{section.title}</h2>
+          <p>{section.content}</p>
+        </div>
+        <figure class="content-figure">
+          <img src={section.image} alt={section.imageAlt} loading="lazy" decoding="async" width="800" height="600" />
+        </figure>
+      </div>
+    </section>
+  ))}
+
+  <section class="section-editorial bg-mist section-rule">
+    <div class="container-wide">
+      <p class="section-label">What drives us</p>
+      <h2>Our values</h2>
+      <ul class="values-list">
+        {about.values.map((value) => (
+          <li>
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CTABanner
+    title="Come walk the grounds"
+    description="Paradise Valley is open seven days a week. We'd love to show you around."
+    buttonText="Plan your visit"
+    buttonHref="/visit"
+    decorImage="/images/decor/peacock-standing.png"
+    decorWidth="clamp(160px, 24vw, 280px)"
+    decorOpacity={0.22}
+    decorPosition="bottom: 0; right: 2%;"
+  />
+</PageLayout>
+
+<style>
+  .section-editorial {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+  }
+
+  .content-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .content-grid--reverse .content-figure { order: -1; }
+
+  .content-grid h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  .content-grid p {
+    max-width: 42ch;
+    margin-bottom: 0;
+  }
+
+  .content-figure {
+    margin: 0;
+  }
+
+  .content-figure img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .section-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--leaf);
+  }
+
+  .values-list {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(18, 71, 52, 0.12);
+  }
+
+  .values-list li {
+    display: grid;
+    grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(18, 71, 52, 0.12);
+  }
+
+  .values-list h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .values-list p {
+    margin: 0;
+    color: var(--forest-light);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .content-grid,
+    .content-grid--reverse {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .content-grid--reverse .content-figure {
+      order: -1;
+    }
+
+    .values-list li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+import Decor from './Decor.astro';
+---
+
+<section class="section-editorial section-rule about-section">
+  <Decor
+    image="/images/decor/hummingbird.png"
+    width="clamp(95px, 11vw, 165px)"
+    opacity={0.18}
+    rotate="-4deg"
+    position="bottom: 6%; left: -1.5rem;"
+    hideMobile
+  />
+  <div class="container-wide about-layout">
+    <div class="about-copy">
+      <p class="section-label">The garden</p>
+      <h2>Cultivating nature in Borne</h2>
+      <p class="pull-quote">More than a nursery — a place where Dominica's botanical heritage is lived in, every day.</p>
+      <p>Paradise Valley sits in the fertile volcanic soil of St. John Parish. Resident peacocks wander historic estate grounds while rare <em>Anthurium dominicense</em> and endemic palms are propagated on-site.</p>
+      <a href="/about" class="text-link">Read our story</a>
+    </div>
+    <figure class="about-figure">
+      <img src="/images/peacock-perch.jpg" alt="A resident peacock in full plumage among the tropical foliage" loading="lazy" decoding="async" width="900" height="1100" />
+      <figcaption>A resident peacock among the gardens, Borne</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    position: relative;
+    overflow: clip;
+    isolation: isolate;
+  }
+
+  .about-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 8vw, 7rem);
+    align-items: start;
+  }
+
+  .about-copy,
+  .about-figure {
+    min-width: 0;
+  }
+
+  .section-label {
+    margin: 0 0 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--leaf);
+  }
+
+  .about-copy h2 {
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    max-width: 14ch;
+  }
+
+  .about-copy > p:not(.pull-quote):not(.section-label) {
+    max-width: 42ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-figure {
+    margin: 0;
+    position: relative;
+  }
+
+  .about-figure img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .about-figure figcaption {
+    margin-top: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--forest-light);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .about-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-copy h2 {
+      max-width: none;
+    }
+
+    .about-figure img {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

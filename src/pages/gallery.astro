@@ -1,0 +1,229 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTABanner from '../components/CTABanner.astro';
+import site from '../data/site.json';
+
+const categories = [...new Set(site.gallery.map((item) => item.category))];
+---
+
+<PageLayout
+  title="Gallery"
+  description="Explore photos of Paradise Valley Garden & Nursery — lush botanical grounds, resident peacocks, events, and tropical flora in Borne, Dominica."
+  image="/images/pvalley.jpg"
+>
+  <PageHeader
+    title="Gallery"
+    subtitle="Sixty acres of cultivated landscape, captured in season."
+    image="/images/pvalley.jpg"
+  />
+
+  <section class="section-editorial">
+    <div class="container-wide">
+      <div class="gallery-toolbar reveal">
+        <div class="gallery-filters" role="tablist" aria-label="Filter gallery by category">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          {categories.map((cat) => (
+            <button class="filter-btn" data-filter={cat.toLowerCase()} role="tab" aria-selected="false">{cat}</button>
+          ))}
+        </div>
+        <p class="filter-status" id="filterStatus" aria-live="polite">Showing all {site.gallery.length} photos</p>
+      </div>
+
+      <div class="gallery-grid">
+        {site.gallery.map((item, i) => (
+          <figure
+            class={`gallery-item reveal reveal-delay-${(i % 4) + 1}`}
+            data-category={item.category.toLowerCase()}
+          >
+            <button class="gallery-img-wrap" data-lightbox type="button" aria-label={`View full size: ${item.alt}`}>
+              <img src={item.src} alt={item.alt} loading="lazy" decoding="async" width="600" height="450" />
+              <div class="gallery-overlay">
+                <span class="gallery-zoom">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </span>
+                <span class="gallery-category">{item.category}</span>
+              </div>
+            </button>
+            <figcaption>{item.alt}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightbox-close" aria-label="Close preview">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="" />
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <CTABanner
+    title="See it in person"
+    description="Photographs only go so far. The gardens are best experienced on foot."
+    buttonText="Plan your visit"
+    buttonHref="/visit"
+    decorImage="/images/decor/peacock-fancy.png"
+    decorWidth="clamp(150px, 22vw, 240px)"
+    decorOpacity={0.17}
+    decorPosition="top: 50%; right: 1%; translate: 0 -50%;"
+  />
+</PageLayout>
+
+<style>
+  .gallery-toolbar {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .filter-btn {
+    padding: 0.7rem 1.25rem;
+    min-height: 2.75rem;
+    background: var(--white);
+    border: 1px solid rgba(20, 54, 44, 0.12);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--forest-medium);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--forest-deep);
+    color: var(--forest-deep);
+  }
+
+  .filter-btn.active {
+    background: var(--forest-deep);
+    border-color: var(--forest-deep);
+    color: var(--white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .filter-status {
+    font-size: 0.8rem;
+    color: var(--forest-light);
+    margin-bottom: 0;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1.5rem;
+  }
+
+  .gallery-item {
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  }
+
+  .gallery-item.is-hidden {
+    display: none;
+  }
+
+  .gallery-img-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 0;
+    cursor: zoom-in;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    background: none;
+    transition: box-shadow var(--transition);
+  }
+
+  .gallery-img-wrap:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .gallery-img-wrap img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.55s var(--ease-out);
+  }
+
+  .gallery-img-wrap:hover img {
+    transform: scale(1.06);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 54, 44, 0.75) 0%, rgba(20, 54, 44, 0.1) 60%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .gallery-img-wrap:hover .gallery-overlay,
+  .gallery-img-wrap:focus-visible .gallery-overlay {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-zoom {
+      display: none;
+    }
+
+    .gallery-img-wrap img {
+      transform: none;
+    }
+  }
+
+  .gallery-zoom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border-radius: var(--radius-full);
+    color: var(--white);
+  }
+
+  .gallery-category {
+    color: var(--white);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.84rem;
+    color: var(--forest-light);
+    line-height: 1.5;
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTABanner from '../components/CTABanner.astro';
+import site from '../data/site.json';
+---
+
+<PageLayout
+  title="Events"
+  description="Join us at Paradise Valley Garden & Nursery for the annual Jazz & Arts festival and other celebrations in Dominica's botanical heartland."
+  image="/images/jazzandarts.jpg"
+>
+  <PageHeader
+    title="Events"
+    subtitle="Music, art, and gatherings in the garden."
+    image="/images/jazzandarts.jpg"
+  />
+
+  <section class="section-editorial">
+    <div class="container-wide">
+      {site.events.map((event) => (
+        <article class="event-feature">
+          <figure class="event-feature-img">
+            <img src={event.image} alt={event.title} loading="lazy" decoding="async" width="900" height="600" />
+          </figure>
+          <div class="event-feature-content">
+            <p class="event-date">{event.day ? `${event.month} ${event.day}, ${event.year}` : `${event.month} ${event.year}`}</p>
+            <h2>{event.title}</h2>
+            <p class="event-lead">{event.description}</p>
+            <p>{event.longDescription}</p>
+            {event.highlights && (
+              <ul class="event-highlights">
+                {event.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            )}
+            <a href="/visit" class="text-link">Enquire about this event</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CTABanner
+    title="Host your event here"
+    description="Weddings, celebrations, and private gatherings among the palms."
+    buttonText="Enquire"
+    buttonHref="/visit"
+    decorImage="/images/decor/flowers-pink.png"
+    decorWidth="clamp(150px, 20vw, 235px)"
+    decorOpacity={0.2}
+    decorFlip={true}
+    decorPosition="top: 50%; right: 1.5%; translate: 0 -50%;"
+  />
+</PageLayout>
+
+<style>
+  .event-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+
+  .event-feature:last-child { margin-bottom: 0; }
+
+  .event-feature-img {
+    margin: 0;
+  }
+
+  .event-feature-img img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .event-date {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--tropical-coral);
+  }
+
+  .event-feature-content h2 {
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .event-lead {
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--forest-deep);
+    margin-bottom: 1rem;
+  }
+
+  .event-highlights {
+    margin: 1.25rem 0 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .event-highlights li {
+    font-size: 0.9rem;
+    color: var(--forest-light);
+    list-style: none;
+  }
+
+  .event-highlights li::before {
+    content: '·';
+    color: var(--tropical-coral);
+    margin-right: 0.35rem;
+  }
+
+  @media (max-width: 900px) {
+    .event-feature {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
