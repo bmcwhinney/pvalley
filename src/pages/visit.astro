@@ -86,15 +86,17 @@ const mapUrl = site.mapsUrl;
         </div>
 
         <div class="visit-map reveal reveal-delay-2">
-          <div class="map-wrap">
-            <iframe
-              src={embedUrl}
-              title="Map showing Paradise Valley Garden & Nursery location in Borne, Dominica"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allow="fullscreen"
-            ></iframe>
-          </div>
+          <figure class="map-figure">
+            <div class="map-wrap">
+              <iframe
+                src={embedUrl}
+                title="Map showing Paradise Valley Garden & Nursery location in Borne, Dominica"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allow="fullscreen"
+              ></iframe>
+            </div>
+          </figure>
           <p class="directions-text">{visit.directions}</p>
         </div>
       </div>
@@ -241,6 +243,39 @@ const mapUrl = site.mapsUrl;
     max-width: 100%;
     text-align: center;
     margin: 0.75rem auto 0;
+  }
+
+  .map-figure {
+    position: relative;
+    isolation: isolate;
+    margin: 0;
+  }
+
+  /* Loose hand-drawn crayon frame in garden green */
+  .map-figure::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -12px -14px -14px -10px;
+    border: 2.5px solid var(--leaf);
+    border-radius: 20px 16px 22px 18px;
+    transform: rotate(-0.7deg);
+    opacity: 0.65;
+    filter: var(--crayon-filter);
+    pointer-events: none;
+  }
+
+  .map-figure::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -6px -7px -7px -5px;
+    border: 2px solid var(--forest-light);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(0.6deg);
+    opacity: 0.5;
+    filter: var(--crayon-filter);
+    pointer-events: none;
   }
 
   .map-wrap {
