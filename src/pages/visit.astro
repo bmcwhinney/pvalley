@@ -6,7 +6,7 @@ import site from '../data/site.json';
 const { visit, phone, phoneDisplay, email, address, hours, social } = site;
 const placeQuery = 'Paradise Valley Garden Nursery, Borne, Dominica';
 const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(placeQuery)}&z=16&output=embed`;
-const mapUrl = 'https://maps.app.goo.gl/bdsYX3XEpjMDtweBA';
+const mapUrl = site.mapsUrl;
 ---
 
 <PageLayout
