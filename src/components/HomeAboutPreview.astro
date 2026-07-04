@@ -34,6 +34,7 @@ const peacock = img('/images/peacock-perch.webp');
           alt="A resident peacock in full plumage among the tropical foliage"
         />
       </div>
+      <figcaption>A resident peacock among the gardens, Borne</figcaption>
     </figure>
   </div>
 </section>
@@ -127,6 +128,13 @@ const peacock = img('/images/peacock-perch.webp');
 
   .about-figure:hover .about-figure-media img {
     transform: rotate(0deg) scale(1.01);
+  }
+
+  .about-figure figcaption {
+    margin-top: 1.35rem;
+    font-size: 0.8rem;
+    color: var(--forest-light);
+    font-style: italic;
   }
 
   @media (prefers-reduced-motion: reduce) {
