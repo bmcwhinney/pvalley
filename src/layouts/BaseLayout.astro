@@ -38,6 +38,12 @@ const ogImage = image.startsWith('http') ? image : `${url}${image}`;
   <meta name="theme-color" content="#14362c" />
   <link rel="canonical" href={canonicalURL} />
 
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
   <meta name="geo.region" content="DM-06" />
   <meta name="geo.placename" content={address.display} />
   <meta name="geo.position" content={`${geo.latitude};${geo.longitude}`} />
