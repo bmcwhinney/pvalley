@@ -125,7 +125,13 @@
     { "src": "/images/peacock-cannon.webp", "alt": "Peacock atop a historic estate cannon among red blooms", "category": "Wildlife" },
     { "src": "/images/pval44.webp", "alt": "Lush nursery grounds at Paradise Valley", "category": "Grounds" },
     { "src": "/images/peacock-roots.webp", "alt": "Peacock resting in the shade of a mango tree", "category": "Wildlife" },
-    { "src": "/images/donkeys.webp", "alt": "Resident donkeys on the estate grounds after the rain", "category": "Wildlife" }
+    { "src": "/images/donkeys.webp", "alt": "Resident donkeys on the estate grounds after the rain", "category": "Wildlife" },
+    { "src": "/images/peacock-display.webp", "alt": "A resident peacock displaying its full tail fan in the gardens", "category": "Wildlife" },
+    { "src": "/images/grounds-dogs.webp", "alt": "Dogs roaming the landscaped grounds among tropical planting", "category": "Wildlife" },
+    { "src": "/images/donkey-and-dog.webp", "alt": "A dog leading a resident donkey across the estate grounds", "category": "Wildlife" },
+    { "src": "/images/grounds-statue-flowers.webp", "alt": "Red crown-of-thorns blooms beside a stone statue and garden pavilion", "category": "Grounds" },
+    { "src": "/images/lotus-pond.webp", "alt": "Pink lotus flower blooming on a garden pond", "category": "Grounds" },
+    { "src": "/images/garden-arch-purple.webp", "alt": "Purple-flowering archway over a brick garden path", "category": "Grounds" }
   ],
   "about": {
     "hero": {
