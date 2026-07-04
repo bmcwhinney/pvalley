@@ -343,7 +343,7 @@ address { font-style: normal; }
   justify-content: center;
   background: var(--forest-deep);
   color: var(--white);
-  border: none;
+  border: 2px solid #f0c14b;
   border-radius: var(--radius-full);
   cursor: pointer;
   box-shadow: var(--shadow-md);
@@ -573,8 +573,12 @@ body.menu-open {
     padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
   .back-to-top {
-    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
     right: 1.25rem;
+  }
+  /* Lift clear of the quick-actions bar only on pages that show it */
+  body:has(.quick-actions) .back-to-top {
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .btn {
