@@ -82,7 +82,6 @@ const mapUrl = site.mapsUrl;
             </ul>
           </div>
 
-          <a href={mapUrl} class="btn" target="_blank" rel="noopener noreferrer">Get Directions</a>
         </div>
 
         <div class="visit-map reveal reveal-delay-2">
@@ -98,6 +97,7 @@ const mapUrl = site.mapsUrl;
             </div>
           </figure>
           <p class="directions-text">{visit.directions}</p>
+          <a href={mapUrl} class="btn" target="_blank" rel="noopener noreferrer">Get Directions</a>
         </div>
       </div>
     </div>
@@ -237,12 +237,11 @@ const mapUrl = site.mapsUrl;
     margin-top: 4px;
   }
 
-  .visit-info .btn {
-    display: flex;
+  .visit-map .btn {
+    display: inline-flex;
     width: fit-content;
     max-width: 100%;
-    text-align: center;
-    margin: 0.75rem auto 0;
+    margin-top: 1.25rem;
   }
 
   .map-figure {
@@ -303,13 +302,6 @@ const mapUrl = site.mapsUrl;
   @media (max-width: 1024px) {
     .visit-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    /* Give the button room from the Visitor Tips crayon box on mobile */
-    .visit-info .btn {
-      margin-top: 1.75rem;
     }
   }
 
