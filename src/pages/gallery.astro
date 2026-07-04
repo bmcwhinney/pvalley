@@ -51,7 +51,6 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
                 <span class="gallery-zoom">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 </span>
-                <span class="gallery-category">{item.category}</span>
               </div>
             </button>
           </figure>
@@ -197,10 +196,7 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
   @media (hover: none) {
     .gallery-overlay {
       opacity: 1;
-    }
-
-    .gallery-zoom {
-      display: none;
+      background: linear-gradient(to top, rgba(20, 54, 44, 0.35) 0%, rgba(20, 54, 44, 0) 55%);
     }
 
     .gallery-img-wrap img {
@@ -223,14 +219,6 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     backdrop-filter: blur(4px);
     border-radius: var(--radius-full);
     color: var(--white);
-  }
-
-  .gallery-category {
-    color: var(--white);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 600;
   }
 
 </style>

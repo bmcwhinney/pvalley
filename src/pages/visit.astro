@@ -115,10 +115,39 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent('Paradise 
   }
 
   .info-card {
+    position: relative;
+    isolation: isolate;
     background: var(--mist);
     padding: clamp(1.25rem, 3vw, 2rem);
     border-radius: var(--radius-lg);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Loose hand-drawn crayon frame around each block. */
+  .info-card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -12px -14px -14px -10px;
+    border: 2.5px solid var(--tropical-coral);
+    border-radius: 20px 16px 22px 18px;
+    transform: rotate(-0.7deg);
+    opacity: 0.6;
+    filter: url(#crayon-edge);
+    pointer-events: none;
+  }
+
+  .info-card::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -6px -7px -7px -5px;
+    border: 2px solid var(--tropical-gold);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(0.6deg);
+    opacity: 0.45;
+    filter: url(#crayon-edge);
+    pointer-events: none;
   }
 
   .info-card h2 {
