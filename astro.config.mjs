@@ -5,7 +5,10 @@ export default defineConfig({
   compressHTML: true,
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'hover',
+    defaultStrategy: 'viewport',
+  },
+  experimental: {
+    clientPrerender: true,
   },
   build: {
     inlineStylesheets: 'always',
