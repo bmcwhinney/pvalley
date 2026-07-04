@@ -64,18 +64,17 @@
     const caption = getEl('lightboxCaption');
     const counter = getEl('lightboxCounter');
     const thumb = trigger.querySelector('img');
-    const full = trigger.getAttribute('data-full') || (thumb && (thumb.currentSrc || thumb.src)) || '';
+    const thumbSrc = thumb ? (thumb.currentSrc || thumb.src) : '';
+    const full = trigger.getAttribute('data-full') || thumbSrc || '';
     const alt = trigger.getAttribute('data-caption') || (thumb && thumb.alt) || '';
 
     if (lightboxImg) {
-      lightboxImg.classList.remove('is-loaded');
-      lightboxImg.src = full;
       lightboxImg.alt = alt;
-      if (lightboxImg.complete) {
-        lightboxImg.classList.add('is-loaded');
-      } else {
-        lightboxImg.onload = () => lightboxImg.classList.add('is-loaded');
-      }
+      // Fall back to the thumbnail if the full-res image fails to load.
+      lightboxImg.onerror = () => {
+        if (thumbSrc && lightboxImg.src !== thumbSrc) lightboxImg.src = thumbSrc;
+      };
+      lightboxImg.src = full;
     }
     if (caption) caption.textContent = alt;
 

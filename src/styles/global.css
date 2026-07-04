@@ -425,18 +425,13 @@ address { font-style: normal; }
   max-height: 85vh;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  transform: scale(0.92);
-  opacity: 0;
-  transition: transform 0.4s var(--ease-spring), opacity 0.3s var(--ease-out);
+  transform: scale(0.94);
+  transition: transform 0.4s var(--ease-spring);
   object-fit: contain;
 }
 
 .lightbox.active img {
   transform: scale(1);
-}
-
-.lightbox img.is-loaded {
-  opacity: 1;
 }
 
 .lightbox-close {

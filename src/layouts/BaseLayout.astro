@@ -10,6 +10,7 @@ import '@fontsource/lora/latin-400-italic.css';
 import '@fontsource/gochi-hand/latin-400.css';
 import '../styles/global.css';
 import '../styles/editorial.css';
+import mainScriptUrl from '../scripts/main.js?url';
 
 interface Props {
   title: string;
@@ -114,6 +115,6 @@ const ogImage = image.startsWith('http') ? image : `${url}${image}`;
     </defs>
   </svg>
   <slot />
-  <script src="/scripts/main.js" defer></script>
+  <script src={mainScriptUrl} defer></script>
 </body>
 </html>
