@@ -41,7 +41,7 @@
   "stats": [
     { "value": "60", "suffix": "acres", "label": "Botanical estate" },
     { "value": "6+", "suffix": "", "label": "Core services" },
-    { "value": "1", "suffix": "", "label": "Annual jazz festival" },
+    { "value": "1", "suffix": "", "label": "Annual Jazz & Arts festival" },
     { "value": "Open", "suffix": "", "label": "Seven days a week" }
   ],
   "services": [
