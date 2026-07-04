@@ -1,10 +1,14 @@
 ---
+import { Picture } from 'astro:assets';
 import Decor from './Decor.astro';
+import { img, widthsFor } from '../utils/images';
+
+const peacock = img('/images/peacock-perch.webp');
 ---
 
 <section class="section-editorial section-rule about-section">
   <Decor
-    image="/images/decor/hummingbird.png"
+    image="/images/decor/hummingbird.webp"
     width="clamp(95px, 11vw, 165px)"
     opacity={0.34}
     rotate="-4deg"
@@ -20,7 +24,16 @@ import Decor from './Decor.astro';
       <a href="/about" class="text-link">Read our story</a>
     </div>
     <figure class="about-figure">
-      <img src="/images/peacock-perch.jpg" alt="A resident peacock in full plumage among the tropical foliage" loading="lazy" decoding="async" width="900" height="1100" />
+      <div class="about-figure-media">
+        <Picture
+          src={peacock}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={widthsFor(peacock, [400, 600])}
+          sizes="(max-width: 900px) 92vw, 560px"
+          alt="A resident peacock in full plumage among the tropical foliage"
+        />
+      </div>
       <figcaption>A resident peacock among the gardens, Borne</figcaption>
     </figure>
   </div>
@@ -47,18 +60,14 @@ import Decor from './Decor.astro';
     min-width: 0;
   }
 
-  .section-label {
-    margin: 0 0 1rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--leaf);
-  }
-
   .about-copy h2 {
-    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
-    font-weight: 500;
+    font-family: var(--font-script);
+    font-size: clamp(2.4rem, 4.8vw, 3.6rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
     margin-bottom: 0.5rem;
-    max-width: 14ch;
+    max-width: 16ch;
   }
 
   .about-copy > p:not(.pull-quote):not(.section-label) {
@@ -71,17 +80,67 @@ import Decor from './Decor.astro';
     position: relative;
   }
 
-  .about-figure img {
+  .about-figure-media {
+    position: relative;
+    isolation: isolate;
+    --crayon-1: var(--tropical-coral);
+    --crayon-2: var(--tropical-gold);
+  }
+
+  /* Loose hand-drawn crayon frame around the photo */
+  .about-figure-media::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -11px -13px -13px -8px;
+    border: 2.5px solid var(--crayon-1);
+    border-radius: 22px 16px 20px 18px;
+    transform: rotate(-1.2deg);
+    opacity: 0.6;
+    filter: url(#crayon-edge);
+    pointer-events: none;
+  }
+
+  .about-figure-media::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -5px -6px -6px -4px;
+    border: 2px solid var(--crayon-2);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(0.9deg);
+    opacity: 0.45;
+    filter: url(#crayon-edge);
+    pointer-events: none;
+  }
+
+  .about-figure-media img {
+    display: block;
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
+    border-radius: 14px;
+    border: 5px solid var(--white);
+    box-shadow: var(--shadow-md);
+    transform: rotate(-1deg);
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .about-figure:hover .about-figure-media img {
+    transform: rotate(0deg) scale(1.01);
   }
 
   .about-figure figcaption {
-    margin-top: 0.85rem;
+    margin-top: 1.35rem;
     font-size: 0.8rem;
     color: var(--forest-light);
     font-style: italic;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-figure-media img {
+      transition: none;
+    }
   }
 
   @media (max-width: 900px) {

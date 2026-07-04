@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import site from '../data/site.json';
+import logo from '../assets/logo.png';
 const { phone, phoneDisplay, email, address, hours, social, footerNav } = site;
 ---
 
@@ -7,7 +9,7 @@ const { phone, phoneDisplay, email, address, hours, social, footerNav } = site;
   <div class="container-wide footer-top">
     <div class="footer-brand">
       <a href="/">
-        <img src="/images/logo.png" alt="Paradise Valley Garden & Nursery" class="footer-logo" loading="lazy" decoding="async" width="130" height="100" />
+        <Image src={logo} alt="Paradise Valley Garden & Nursery" class="footer-logo" widths={[220, 440]} sizes="220px" format="webp" loading="lazy" />
       </a>
       <p>Sixty acres of cultivated tropical landscape in Borne, St. John, open to visitors seven days a week.</p>
     </div>
@@ -94,10 +96,11 @@ const { phone, phoneDisplay, email, address, hours, social, footerNav } = site;
 
   .footer-col h4 {
     color: var(--tropical-gold);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
+    font-family: var(--font-script);
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
   }
 
   .footer-col ul {

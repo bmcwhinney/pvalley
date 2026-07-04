@@ -13,8 +13,9 @@
   --tropical-gold: #c9952e;
   --sun-warm: #f5e6c8;
 
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-display: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+  --font-script: 'Gochi Hand', 'Segoe Script', cursive;
 
   --spacing-section: clamp(4rem, 8vw, 6.25rem);
   --container-width: 1140px;
@@ -53,9 +54,10 @@ body {
   background-color: var(--cream);
   color: var(--forest-medium);
   font-family: var(--font-body);
-  font-size: 1.02rem;
-  line-height: 1.75;
+  font-size: 1.06rem;
+  line-height: 1.85;
   font-weight: 400;
+  letter-spacing: 0.004em;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,16 +70,30 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
   color: var(--forest-deep);
-  font-weight: 500;
   line-height: 1.2;
   text-wrap: balance;
 }
 
+/* Display + section headings — the handwritten voice */
+h1, h2 {
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+/* Sub-headings (card titles, etc.) — refined serif for structure & readability */
+h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
 p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
   color: var(--forest-medium);
+  line-height: 1.85;
   text-wrap: pretty;
 }
 
@@ -97,6 +113,12 @@ img {
   height: auto;
   display: block;
   object-fit: cover;
+}
+
+/* <Picture> renders <picture><source><img>; flatten it so the inner <img>
+   participates in layout exactly like a bare <img> would. */
+picture {
+  display: contents;
 }
 
 ul { list-style: none; }
@@ -141,12 +163,14 @@ address { font-style: normal; }
   background-color: var(--mist);
 }
 
-.eyebrow {
+.eyebrow,
+.section-label {
   color: var(--leaf);
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   display: block;
   margin-bottom: 1rem;
 }
@@ -156,51 +180,61 @@ address { font-style: normal; }
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.85rem;
+  position: relative;
+  isolation: isolate;
+  padding: 0.6rem 2.15rem;
   min-height: 2.75rem;
   max-width: 100%;
-  background: var(--forest-deep);
-  color: var(--white);
+  background: transparent;
+  color: var(--forest-deep);
   font-family: var(--font-body);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
-  border: 1px solid var(--forest-deep);
+  border: none;
   cursor: pointer;
-  border-radius: 2px;
   transition:
-    background var(--transition),
     color var(--transition),
-    border-color var(--transition),
-    transform var(--transition),
-    box-shadow var(--transition);
+    transform var(--transition);
   white-space: nowrap;
   text-align: center;
   box-sizing: border-box;
+  --btn-ink: var(--forest-deep);
+}
+
+/* Hand-drawn crayon circle around the label */
+.btn::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -4px -6px;
+  border: 2.5px solid var(--btn-ink);
+  border-radius: 50%;
+  transform: rotate(-1.5deg);
+  filter: url(#crayon-edge);
+  transition:
+    transform var(--transition),
+    border-color var(--transition);
+  pointer-events: none;
 }
 
 .btn:hover {
-  background: var(--tropical-coral);
+  color: var(--tropical-coral);
+  transform: translateY(-1px);
+}
+
+.btn:hover::before {
   border-color: var(--tropical-coral);
-  color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(224, 122, 95, 0.28);
+  transform: rotate(0.5deg) scale(1.05);
 }
 
 .btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(217, 108, 85, 0.2);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-outline {
-  background: transparent;
+  --btn-ink: var(--forest-deep);
   color: var(--forest-deep);
-}
-
-.btn-outline:hover {
-  background: var(--forest-deep);
-  color: var(--white);
-  border-color: var(--forest-deep);
 }
 
 /* ─── Section Header ─── */

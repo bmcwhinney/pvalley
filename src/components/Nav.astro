@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import site from '../data/site.json';
+import logo from '../assets/logo.png';
 
 interface Props {
   variant?: 'home' | 'inner';
@@ -20,7 +22,7 @@ function isActive(href: string) {
 <nav id="navbar" class:list={[{ 'nav--inner': variant === 'inner' }]} aria-label="Main navigation">
   <div class="nav-inner">
     <a href="/" class="nav-logo-link" aria-label="Paradise Valley — Home">
-      <img src="/images/logo.png" alt="Paradise Valley Garden & Nursery" class="logo-img" width="400" height="109" />
+      <Image src={logo} alt="Paradise Valley Garden & Nursery" class="logo-img" widths={[160, 220, 440]} sizes="220px" format="webp" loading="eager" />
     </a>
 
     <button class="menu-toggle" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
@@ -36,12 +38,24 @@ function isActive(href: string) {
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      {nav.map((item, i) => (
+      <div class="nav-primary">
+        {nav.filter((item) => !item.cta).map((item, i) => (
+          <a
+            href={item.href}
+            class:list={['nav-link', { 'nav-link--active': isActive(item.href) }]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            style={`--i: ${i}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      {nav.filter((item) => item.cta).map((item) => (
         <a
           href={item.href}
-          class:list={['nav-link', { 'nav-cta': item.cta, 'nav-link--active': isActive(item.href) }]}
+          class:list={['nav-link', 'nav-cta', { 'nav-link--active': isActive(item.href) }]}
           aria-current={isActive(item.href) ? 'page' : undefined}
-          style={`--i: ${i}`}
         >
           {item.label}
         </a>
@@ -62,7 +76,7 @@ function isActive(href: string) {
         </a>
       </div>
 
-      <img src="/images/peacock.jpg" alt="" class="nav-peacock" loading="lazy" decoding="async" width="120" height="80" />
+      <img src="/images/peacock.webp" alt="" class="nav-peacock" loading="lazy" decoding="async" width="120" height="80" />
     </div>
   </div>
 </nav>
@@ -112,8 +126,8 @@ function isActive(href: string) {
   }
 
   .nav-inner {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
     max-width: 100%;
@@ -134,6 +148,7 @@ function isActive(href: string) {
     align-items: center;
     flex-shrink: 0;
     min-width: 0;
+    justify-self: start;
   }
 
   .nav-logo-link:hover .logo-img {
@@ -153,20 +168,26 @@ function isActive(href: string) {
   }
 
   .nav-links {
+    display: contents;
+  }
+
+  .nav-primary {
     display: flex;
-    gap: clamp(0.4rem, 1.4vw, 1.4rem);
     align-items: center;
+    justify-self: center;
+    gap: clamp(0.4rem, 1.4vw, 1.4rem);
   }
 
   .nav-link {
     color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(0.95rem, 1vw, 1.05rem);
-    font-weight: 500;
-    letter-spacing: 0.005em;
+    font-family: var(--font-script);
+    font-size: clamp(1.3rem, 1.55vw, 1.55rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
     position: relative;
     display: inline-flex;
     align-items: center;
-    padding: 0.55rem 0.6rem;
+    padding: 0.5rem 0.6rem;
     white-space: nowrap;
   }
 
@@ -177,7 +198,7 @@ function isActive(href: string) {
     height: 2px;
     bottom: 0.35rem;
     left: 0.6rem;
-    background-color: var(--tropical-coral);
+    background-color: #f0c14b;
     border-radius: 1px;
     transition: width 0.3s var(--ease-out);
   }
@@ -192,33 +213,53 @@ function isActive(href: string) {
 
   /* Visit CTA — explicit sizing so link styles never collapse it */
   .nav-link.nav-cta {
+    position: relative;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 2.5rem;
-    padding: 0.5rem 1.3rem;
-    margin-left: 0.35rem;
-    font-size: clamp(0.95rem, 1vw, 1.05rem);
-    font-weight: 600;
+    padding: 0.45rem 1.5rem;
+    justify-self: end;
+    font-size: clamp(1.3rem, 1.55vw, 1.55rem);
+    font-weight: 400;
     line-height: 1;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: var(--radius);
+    color: #ffffff;
+    border: none;
     background: transparent;
     white-space: nowrap;
     flex-shrink: 0;
     transition:
-      background var(--transition),
-      border-color var(--transition),
       color var(--transition),
       transform var(--transition);
   }
 
+  /* Hand-drawn crayon circle around the Visit label */
+  .nav-link.nav-cta::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -3px -5px;
+    border: 2.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    transform: rotate(-1.5deg);
+    filter: url(#crayon-edge);
+    transition:
+      transform var(--transition),
+      border-color var(--transition);
+    pointer-events: none;
+  }
+
   .nav-link.nav-cta:hover,
   .nav-link.nav-cta.nav-link--active {
-    background: var(--tropical-coral);
-    border-color: var(--tropical-coral);
-    color: var(--white);
+    color: #f0c14b;
     transform: translateY(-1px);
+  }
+
+  .nav-link.nav-cta:hover::before,
+  .nav-link.nav-cta.nav-link--active::before {
+    border-color: #f0c14b;
+    transform: rotate(0.5deg) scale(1.06);
   }
 
   /* Hamburger */
@@ -282,6 +323,15 @@ function isActive(href: string) {
   @media (max-width: 1100px) {
     .menu-toggle { display: flex; }
 
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .nav-primary {
+      display: contents;
+    }
+
     .nav-contact-info {
       display: flex;
       flex-direction: column;
@@ -308,7 +358,7 @@ function isActive(href: string) {
     }
 
     .nav-contact-info a:hover { color: var(--white); }
-    .nav-contact-info svg { flex-shrink: 0; color: var(--tropical-coral); }
+    .nav-contact-info svg { flex-shrink: 0; color: #f0c14b; }
 
     .nav-peacock {
       display: none;
@@ -318,6 +368,7 @@ function isActive(href: string) {
     body.menu-open #menuBtn { visibility: hidden; }
 
     .nav-links {
+      display: flex;
       position: fixed;
       top: 0;
       right: -100%;
@@ -340,8 +391,8 @@ function isActive(href: string) {
     .nav-links.active { right: 0; }
 
     .nav-links .nav-link:not(.nav-cta) {
-      font-size: 1rem;
-      padding: 0.85rem 0;
+      font-size: 1.4rem;
+      padding: 0.7rem 0;
       opacity: 0;
       transform: translateX(20px);
       transition:
@@ -352,11 +403,11 @@ function isActive(href: string) {
     }
 
     .nav-links .nav-link.nav-cta {
-      width: min(100%, 16rem);
+      width: fit-content;
       min-height: 3rem;
-      margin-top: 1.25rem;
-      padding: 0.85rem 1.5rem;
-      font-size: 1rem;
+      margin-top: 1.5rem;
+      padding: 0.75rem 2rem;
+      font-size: 1.35rem;
       opacity: 0;
       transform: translateX(20px);
       transition:
@@ -382,20 +433,19 @@ function isActive(href: string) {
 
   /* Mid desktop: tighten spacing so the row never overflows */
   @media (min-width: 1101px) and (max-width: 1240px) {
-    .nav-links {
+    .nav-primary {
       gap: 0.2rem;
     }
 
     .nav-link {
-      font-size: 0.95rem;
-      padding-inline: 0.45rem;
+      font-size: 1.2rem;
+      padding-inline: 0.35rem;
     }
 
     .nav-link.nav-cta {
       min-height: 2.4rem;
-      padding: 0.45rem 1.05rem;
-      font-size: 0.95rem;
-      margin-left: 0.35rem;
+      padding: 0.4rem 1.1rem;
+      font-size: 1.2rem;
     }
   }
 </style>

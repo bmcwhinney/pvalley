@@ -98,8 +98,11 @@ const {
   }
 
   .cta-layout h2 {
-    font-size: clamp(1.65rem, 3.5vw, 2.5rem);
-    font-weight: 500;
+    font-family: var(--font-script);
+    font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
     margin-bottom: 0.6rem;
     text-wrap: balance;
   }
@@ -117,7 +120,6 @@ const {
 
   @media (max-width: 768px) {
     .cta-layout .btn {
-      width: 100%;
       white-space: normal;
     }
   }

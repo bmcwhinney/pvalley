@@ -11,12 +11,12 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent('Paradise 
 <PageLayout
   title="Plan Your Visit"
   description="Visit Paradise Valley Garden & Nursery in Borne, St. John, Dominica. Open 7 days a week. Get directions, hours, and contact information."
-  image="/images/pvalley.jpg"
+  image="/images/pvalley.webp"
 >
   <PageHeader
     title={visit.hero.title}
     subtitle={visit.hero.subtitle}
-    image="/images/pvalley.jpg"
+    image="/images/pvalley.webp"
   />
 
   <section class="section-padding">
@@ -206,9 +206,11 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent('Paradise 
   }
 
   .visit-info .btn {
-    width: 100%;
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
     text-align: center;
-    margin-top: 0.5rem;
+    margin: 0.75rem auto 0;
   }
 
   .map-wrap {

@@ -1,12 +1,22 @@
 ---
+import { Picture } from 'astro:assets';
 import site from '../data/site.json';
+import { img, widthsFor } from '../utils/images';
 const event = site.events[0];
+const eventImg = img(event.image);
 ---
 
 <section class="section-editorial section-rule">
   <div class="container-wide event-layout">
     <figure class="event-figure">
-      <img src={event.image} alt={event.title} loading="lazy" decoding="async" width="1000" height="700" />
+      <Picture
+        src={eventImg}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        widths={widthsFor(eventImg, [400, 600, 800])}
+        sizes="(max-width: 900px) 92vw, 620px"
+        alt={event.title}
+      />
     </figure>
     <div class="event-copy">
       <p class="section-label">Coming up</p>
@@ -27,20 +37,59 @@ const event = site.events[0];
   }
 
   .event-figure {
+    position: relative;
+    isolation: isolate;
     margin: 0;
+    --crayon-1: #f4c20d;
+    --crayon-2: #e9a417;
+  }
+
+  /* Loose hand-drawn crayon frame in vibrant yellow */
+  .event-figure::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -11px -13px -13px -8px;
+    border: 2.5px solid var(--crayon-1);
+    border-radius: 22px 16px 20px 18px;
+    transform: rotate(-1.2deg);
+    opacity: 0.85;
+    filter: url(#crayon-edge);
+    pointer-events: none;
+  }
+
+  .event-figure::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -5px -6px -6px -4px;
+    border: 2px solid var(--crayon-2);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(0.9deg);
+    opacity: 0.65;
+    filter: url(#crayon-edge);
+    pointer-events: none;
   }
 
   .event-figure img {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
+    border-radius: 14px;
+    border: 5px solid var(--white);
+    box-shadow: var(--shadow-md);
+    transform: rotate(-1deg);
+    transition: transform 0.45s var(--ease-spring);
   }
 
-  .section-label {
-    margin: 0 0 0.75rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--leaf);
+  .event-figure:hover img {
+    transform: rotate(0deg) scale(1.01);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .event-figure img {
+      transition: none;
+    }
   }
 
   .event-date {
@@ -52,10 +101,13 @@ const event = site.events[0];
   }
 
   .event-copy h2 {
-    font-size: clamp(1.75rem, 3.5vw, 2.35rem);
-    font-weight: 500;
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 3.8vw, 2.7rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
     margin-bottom: 1rem;
-    max-width: 16ch;
+    max-width: 18ch;
   }
 
   .event-copy > p:not(.section-label):not(.event-date) {

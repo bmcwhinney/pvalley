@@ -1,8 +1,21 @@
 ---
+import { Picture } from 'astro:assets';
+import heroImg from '../assets/images/pvalley.webp';
 ---
 
 <header class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true">
+    <Picture
+      src={heroImg}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[640, 960, 1280, 1400]}
+      sizes="100vw"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="container-wide hero-inner">
     <div class="hero-content">
@@ -32,7 +45,13 @@
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: url('/images/pvalley.jpg') center / cover no-repeat;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .hero-overlay {
@@ -66,25 +85,28 @@
   }
 
   .hero-kicker {
-    margin: 0 0 1rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 1.1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
     text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
   }
 
   .hero-content h1 {
     color: #ffffff !important;
-    font-size: clamp(2.25rem, 6vw, 3.75rem);
-    font-weight: 500;
-    line-height: 1.1;
+    font-family: var(--font-script);
+    font-size: clamp(2.75rem, 7.5vw, 4.75rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
     margin-bottom: 1.25rem;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
   }
 
   .hero-content h1 em {
-    font-style: italic;
+    font-style: normal;
     font-weight: 400;
     color: #f0c14b;
   }
@@ -101,31 +123,24 @@
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: clamp(1.75rem, 4vw, 3rem);
   }
 
-  .btn-hero {
-    background: #ffffff;
-    color: var(--forest-deep);
-    border-color: #ffffff;
-  }
-
-  .btn-hero:hover {
-    background: var(--tropical-coral);
-    border-color: var(--tropical-coral);
-    color: #ffffff;
-  }
-
+  .btn-hero,
   .btn-hero-outline {
-    background: transparent;
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.55);
+    --btn-ink: #ffffff;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
   }
 
+  .btn-hero:hover,
   .btn-hero-outline:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: #ffffff;
-    color: #ffffff;
+    color: #f0c14b;
+  }
+
+  .btn-hero:hover::before,
+  .btn-hero-outline:hover::before {
+    border-color: #f0c14b;
   }
 
   @media (max-width: 768px) {

@@ -1,19 +1,21 @@
 ---
+import { Picture } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import CTABanner from '../components/CTABanner.astro';
 import site from '../data/site.json';
+import { img, widthsFor } from '../utils/images';
 ---
 
 <PageLayout
   title="Events"
   description="Join us at Paradise Valley Garden & Nursery for the annual Jazz & Arts festival and other celebrations in Dominica's botanical heartland."
-  image="/images/jazzandarts.jpg"
+  image="/images/jazzandarts.webp"
 >
   <PageHeader
     title="Events"
     subtitle="Music, art, and gatherings in the garden."
-    image="/images/events-banner.jpg"
+    image="/images/events-banner.webp"
   />
 
   <section class="section-editorial">
@@ -21,7 +23,14 @@ import site from '../data/site.json';
       {site.events.map((event) => (
         <article class="event-feature">
           <figure class="event-feature-img">
-            <img src={event.image} alt={event.title} loading="lazy" decoding="async" width="900" height="600" />
+            <Picture
+              src={img(event.image)}
+              formats={['avif', 'webp']}
+              fallbackFormat="webp"
+              widths={widthsFor(img(event.image), [400, 600, 800])}
+              sizes="(max-width: 900px) 92vw, 560px"
+              alt={event.title}
+            />
           </figure>
           <div class="event-feature-content">
             <p class="event-date">{event.day ? `${event.month} ${event.day}, ${event.year}` : `${event.month} ${event.year}`}</p>
@@ -47,12 +56,12 @@ import site from '../data/site.json';
     description="Weddings, celebrations, and private gatherings among the palms."
     buttonText="Enquire"
     buttonHref="/visit"
-    decorImage="/images/decor/flowers-pink.png"
+    decorImage="/images/decor/flowers-pink.webp"
     decorWidth="clamp(150px, 20vw, 235px)"
     decorOpacity={0.36}
     decorFlip={true}
     decorPosition="top: 50%; right: 1.5%; translate: 0 -50%;"
-    decor2Image="/images/decor/flowers-blue.png"
+    decor2Image="/images/decor/flowers-blue.webp"
     decor2Width="clamp(140px, 18vw, 220px)"
     decor2Opacity={0.36}
     decor2Rotate="-4deg"
@@ -72,13 +81,59 @@ import site from '../data/site.json';
   .event-feature:last-child { margin-bottom: 0; }
 
   .event-feature-img {
+    position: relative;
+    isolation: isolate;
     margin: 0;
+    --crayon-1: #f4c20d;
+    --crayon-2: #e9a417;
+  }
+
+  /* Loose hand-drawn crayon frame in vibrant yellow */
+  .event-feature-img::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -11px -13px -13px -8px;
+    border: 2.5px solid var(--crayon-1);
+    border-radius: 22px 16px 20px 18px;
+    transform: rotate(-1.2deg);
+    opacity: 0.85;
+    filter: url(#crayon-edge);
+    pointer-events: none;
+  }
+
+  .event-feature-img::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -5px -6px -6px -4px;
+    border: 2px solid var(--crayon-2);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(0.9deg);
+    opacity: 0.65;
+    filter: url(#crayon-edge);
+    pointer-events: none;
   }
 
   .event-feature-img img {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
+    border-radius: 14px;
+    border: 5px solid var(--white);
+    box-shadow: var(--shadow-md);
+    transform: rotate(-1deg);
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .event-feature-img:hover img {
+    transform: rotate(0deg) scale(1.01);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .event-feature-img img {
+      transition: none;
+    }
   }
 
   .event-date {

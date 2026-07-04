@@ -1,35 +1,37 @@
 ---
+import { Picture } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import CTABanner from '../components/CTABanner.astro';
 import Decor from '../components/Decor.astro';
 import site from '../data/site.json';
+import { img, widthsFor } from '../utils/images';
 
 const serviceImages = [
-  { src: '/images/scenic-tours.jpg', alt: 'A rustic pergola and bell among lush tropical planting along a garden path at Paradise Valley' },
-  { src: '/images/weddings.jpg', alt: 'Guests celebrating a wedding at golden hour with mountain and sunset views at Paradise Valley' },
-  { src: '/images/landscaping-hardscaping.jpg', alt: 'Stone steps and dry-stone walls winding through flowering tropical gardens at Paradise Valley' },
-  { src: '/images/plant-variety.jpg', alt: 'Red anthuriums in bloom among ferns along a tropical garden trail at Paradise Valley' },
-  { src: '/images/gardening-supplies.jpg', alt: 'Terracotta and hand-painted pots, soil, fertilizer, and tools among flowering plants at Paradise Valley' },
-  { src: '/images/peacock-perch.jpg', alt: 'A peacock among the lush estate foliage' },
+  { src: '/images/scenic-tours.webp', alt: 'A rustic pergola and bell among lush tropical planting along a garden path at Paradise Valley' },
+  { src: '/images/weddings.webp', alt: 'Guests celebrating a wedding at golden hour with mountain and sunset views at Paradise Valley' },
+  { src: '/images/landscaping-hardscaping.webp', alt: 'Stone steps and dry-stone walls winding through flowering tropical gardens at Paradise Valley' },
+  { src: '/images/plant-variety.webp', alt: 'Red anthuriums in bloom among ferns along a tropical garden trail at Paradise Valley' },
+  { src: '/images/gardening-supplies.webp', alt: 'Terracotta and hand-painted pots, soil, fertilizer, and tools among flowering plants at Paradise Valley' },
+  { src: '/images/peacock-perch.webp', alt: 'A peacock among the lush estate foliage' },
 ];
 ---
 
 <PageLayout
   title="Our Services"
   description="Scenic botanical tours, weddings & events, landscaping, tropical plant nursery, gardening supplies, and expert plant care at Paradise Valley Garden & Nursery, Dominica."
-  image="/images/pvalley.jpg"
+  image="/images/pvalley.webp"
 >
   <PageHeader
     title="Our services"
     subtitle="Scenic tours, weddings and events, landscaping, nursery plants, gardening supplies, and plant care from our estate in Borne."
-    image="/images/pvalley.jpg"
+    image="/images/pvalley.webp"
     breadcrumbLabel="Services"
   />
 
   <section class="services-intro section-editorial">
     <Decor
-      image="/images/decor/lovebird.png"
+      image="/images/decor/lovebird.webp"
       width="clamp(120px, 16vw, 200px)"
       opacity={0.32}
       rotate="3deg"
@@ -62,13 +64,13 @@ const serviceImages = [
             )}
           </div>
           <figure class="service-figure">
-            <img
-              src={image.src}
+            <Picture
+              src={img(image.src)}
+              formats={['avif', 'webp']}
+              fallbackFormat="webp"
+              widths={widthsFor(img(image.src), [400, 600, 800])}
+              sizes="(max-width: 900px) 92vw, 600px"
               alt={image.alt}
-              loading="lazy"
-              decoding="async"
-              width="900"
-              height="700"
             />
           </figure>
         </div>
@@ -81,11 +83,11 @@ const serviceImages = [
     description="The best way to choose is to walk the grounds. We're open seven days a week in Borne."
     buttonText="Plan your visit"
     buttonHref="/visit"
-    decorImage="/images/decor/peacock-fan.png"
+    decorImage="/images/decor/peacock-fan.webp"
     decorWidth="clamp(160px, 24vw, 260px)"
     decorOpacity={0.32}
     decorPosition="top: 50%; right: 1%; translate: 0 -50%;"
-    decor2Image="/images/decor/flowers-blue.png"
+    decor2Image="/images/decor/flowers-blue.webp"
     decor2Width="clamp(140px, 20vw, 230px)"
     decor2Opacity={0.34}
     decor2Rotate="-4deg"
@@ -107,13 +109,6 @@ const serviceImages = [
     max-width: min(46rem, 100%);
     margin-inline: auto;
     text-align: center;
-  }
-
-  .section-label {
-    margin: 0 0 0.75rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--leaf);
   }
 
   .intro-layout h2 {
@@ -169,6 +164,10 @@ const serviceImages = [
     max-width: 100%;
   }
 
+  .service-copy {
+    text-align: center;
+  }
+
   .service-num {
     display: block;
     margin-bottom: 0.65rem;
@@ -183,14 +182,14 @@ const serviceImages = [
   .service-copy h2 {
     font-size: clamp(1.4rem, 3.8vw, 2.35rem);
     font-weight: 500;
-    margin: 0 0 0.85rem;
+    margin: 0 auto 0.85rem;
     max-width: 14ch;
     overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
   .service-lead {
-    margin: 0 0 0.9rem;
+    margin: 0 auto 0.9rem;
     font-family: var(--font-display);
     font-size: clamp(1.05rem, 2.4vw, 1.35rem);
     font-style: italic;
@@ -202,7 +201,7 @@ const serviceImages = [
   }
 
   .service-body {
-    margin: 0 0 1.1rem;
+    margin: 0 auto 1.1rem;
     font-size: clamp(0.95rem, 1.8vw, 1rem);
     line-height: 1.75;
     color: var(--forest-medium);
@@ -211,7 +210,7 @@ const serviceImages = [
   }
 
   .service-tags {
-    margin: 0;
+    margin: 0 auto;
     font-size: clamp(0.82rem, 1.6vw, 0.88rem);
     line-height: 1.65;
     color: var(--forest-light);
@@ -220,8 +219,43 @@ const serviceImages = [
   }
 
   .service-figure {
+    position: relative;
+    isolation: isolate;
     margin: 0;
     width: 100%;
+    --crayon-1: var(--tropical-coral);
+    --crayon-2: var(--tropical-gold);
+  }
+
+  .service-block--reverse .service-figure {
+    --crayon-1: var(--tropical-gold);
+    --crayon-2: var(--tropical-coral);
+  }
+
+  /* Loose hand-drawn crayon outline */
+  .service-figure::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -11px -13px -13px -8px;
+    border: 2.5px solid var(--crayon-1);
+    border-radius: 22px 16px 20px 18px;
+    transform: rotate(-1.4deg);
+    opacity: 0.6;
+    filter: url(#crayon-edge);
+  }
+
+  /* Second, offset stroke for a sketchy double-line feel */
+  .service-figure::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -5px -6px -6px -4px;
+    border: 2px solid var(--crayon-2);
+    border-radius: 16px 20px 15px 22px;
+    transform: rotate(1deg);
+    opacity: 0.45;
+    filter: url(#crayon-edge);
   }
 
   .service-figure img {
@@ -231,6 +265,25 @@ const serviceImages = [
     max-width: 100%;
     aspect-ratio: 5 / 4;
     object-fit: cover;
+    border-radius: 14px;
+    border: 5px solid var(--white);
+    box-shadow: var(--shadow-md);
+    transform: rotate(-1.2deg);
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .service-block--reverse .service-figure img {
+    transform: rotate(1.2deg);
+  }
+
+  .service-figure:hover img {
+    transform: rotate(0deg) scale(1.015);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-figure img {
+      transition: none;
+    }
   }
 
   /* Large tablet: still two columns, slightly tighter type */
