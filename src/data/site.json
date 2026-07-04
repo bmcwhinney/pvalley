@@ -13,6 +13,7 @@
     "display": "Borne, St. John, Dominica"
   },
   "mapsUrl": "https://maps.app.goo.gl/bdsYX3XEpjMDtweBA",
+  "googleMapsPlace": "https://www.google.com/maps?cid=3809049216191249647",
   "geo": {
     "latitude": 15.5779925,
     "longitude": -61.4207256

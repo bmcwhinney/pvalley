@@ -19,6 +19,7 @@ const quickActions = showQuickActions || currentPath.startsWith('/visit');
 ---
 
 <BaseLayout title={title} description={description} image={image}>
+  <slot name="head" slot="head" />
   <Nav variant={variant} currentPath={currentPath} />
   <main id="main-content">
     <slot />

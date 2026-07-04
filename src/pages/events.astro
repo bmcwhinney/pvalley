@@ -5,6 +5,49 @@ import PageHeader from '../components/PageHeader.astro';
 import CTABanner from '../components/CTABanner.astro';
 import site from '../data/site.json';
 import { img, widthsFor } from '../utils/images';
+
+const monthMap: Record<string, string> = {
+  January: '01', February: '02', March: '03', April: '04', May: '05', June: '06',
+  July: '07', August: '08', September: '09', October: '10', November: '11', December: '12',
+};
+
+const eventSchema = site.events.map((event) => {
+  const mm = monthMap[event.month] ?? '01';
+  const startDate = event.day
+    ? `${event.year}-${mm}-${String(event.day).padStart(2, '0')}`
+    : `${event.year}-${mm}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    startDate,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    description: event.longDescription || event.description,
+    image: [`${site.url}${event.image}`],
+    location: {
+      '@type': 'Place',
+      name: site.name,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: site.address.street,
+        addressLocality: site.address.locality,
+        addressRegion: site.address.region,
+        addressCountry: site.address.country,
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: site.geo.latitude,
+        longitude: site.geo.longitude,
+      },
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+    },
+  };
+});
 ---
 
 <PageLayout
@@ -12,6 +55,10 @@ import { img, widthsFor } from '../utils/images';
   description="Join us at Paradise Valley Garden & Nursery for the annual Jazz & Arts festival and other celebrations in Dominica's botanical heartland."
   image="/images/jazzandarts.webp"
 >
+  {eventSchema.map((schema) => (
+    <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  ))}
+
   <PageHeader
     title="Events"
     subtitle="Music, art, and gatherings in the garden."
