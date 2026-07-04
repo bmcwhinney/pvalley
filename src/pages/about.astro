@@ -157,7 +157,7 @@ const { about } = site;
     border-radius: 22px 16px 20px 18px;
     transform: rotate(-1.4deg);
     opacity: 0.6;
-    filter: url(#crayon-edge);
+    filter: var(--crayon-filter);
   }
 
   /* Second, offset stroke for a sketchy double-line feel */
@@ -170,7 +170,7 @@ const { about } = site;
     border-radius: 16px 20px 15px 22px;
     transform: rotate(1deg);
     opacity: 0.45;
-    filter: url(#crayon-edge);
+    filter: var(--crayon-filter);
   }
 
   .content-figure img {

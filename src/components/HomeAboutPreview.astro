@@ -34,7 +34,6 @@ const peacock = img('/images/peacock-perch.webp');
           alt="A resident peacock in full plumage among the tropical foliage"
         />
       </div>
-      <figcaption>A resident peacock among the gardens, Borne</figcaption>
     </figure>
   </div>
 </section>
@@ -97,7 +96,7 @@ const peacock = img('/images/peacock-perch.webp');
     border-radius: 22px 16px 20px 18px;
     transform: rotate(-1.2deg);
     opacity: 0.6;
-    filter: url(#crayon-edge);
+    filter: var(--crayon-filter);
     pointer-events: none;
   }
 
@@ -110,7 +109,7 @@ const peacock = img('/images/peacock-perch.webp');
     border-radius: 16px 20px 15px 22px;
     transform: rotate(0.9deg);
     opacity: 0.45;
-    filter: url(#crayon-edge);
+    filter: var(--crayon-filter);
     pointer-events: none;
   }
 
@@ -128,13 +127,6 @@ const peacock = img('/images/peacock-perch.webp');
 
   .about-figure:hover .about-figure-media img {
     transform: rotate(0deg) scale(1.01);
-  }
-
-  .about-figure figcaption {
-    margin-top: 1.35rem;
-    font-size: 0.8rem;
-    color: var(--forest-light);
-    font-style: italic;
   }
 
   @media (prefers-reduced-motion: reduce) {

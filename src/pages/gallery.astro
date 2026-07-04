@@ -62,7 +62,6 @@ const fullImages = await Promise.all(
               class="gallery-img-wrap"
               data-lightbox
               data-full={fullImages[i]}
-              data-caption={item.alt}
               type="button"
               aria-label={`View full size: ${item.alt}`}
             >
@@ -97,7 +96,6 @@ const fullImages = await Promise.all(
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-    <p class="lightbox-caption" id="lightboxCaption"></p>
     <span class="lightbox-counter" id="lightboxCounter" aria-hidden="true"></span>
   </div>
 

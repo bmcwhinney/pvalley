@@ -61,12 +61,11 @@
     if (!trigger) return;
 
     const lightboxImg = getEl('lightboxImg');
-    const caption = getEl('lightboxCaption');
     const counter = getEl('lightboxCounter');
     const thumb = trigger.querySelector('img');
     const thumbSrc = thumb ? (thumb.currentSrc || thumb.src) : '';
     const full = trigger.getAttribute('data-full') || thumbSrc || '';
-    const alt = trigger.getAttribute('data-caption') || (thumb && thumb.alt) || '';
+    const alt = (thumb && thumb.alt) || '';
 
     if (lightboxImg) {
       lightboxImg.alt = alt;
@@ -76,7 +75,6 @@
       };
       lightboxImg.src = full;
     }
-    if (caption) caption.textContent = alt;
 
     const multiple = lightboxItems.length > 1;
     if (counter) counter.textContent = multiple ? `${lightboxIndex + 1} / ${lightboxItems.length}` : '';
