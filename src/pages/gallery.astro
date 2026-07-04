@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import CTABanner from '../components/CTABanner.astro';
@@ -7,6 +7,22 @@ import site from '../data/site.json';
 import { img, widthsFor } from '../utils/images';
 
 const categories = [...new Set(site.gallery.map((item) => item.category))];
+const countFor = (cat: string) => site.gallery.filter((i) => i.category === cat).length;
+
+// Pre-generate a high-resolution WebP for each photo, used by the lightbox
+// so the enlarged view is crisp rather than an upscaled thumbnail.
+const fullImages = await Promise.all(
+  site.gallery.map(async (item) => {
+    const meta = img(item.src);
+    const large = await getImage({
+      src: meta,
+      format: 'webp',
+      width: Math.min(1600, meta.width),
+      quality: 82,
+    });
+    return large.src;
+  }),
+);
 ---
 
 <PageLayout
@@ -24,9 +40,13 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     <div class="container-wide">
       <div class="gallery-toolbar reveal">
         <div class="gallery-filters" role="tablist" aria-label="Filter gallery by category">
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn active" data-filter="all" data-label="All" role="tab" aria-selected="true">
+            All <span class="filter-count">{site.gallery.length}</span>
+          </button>
           {categories.map((cat) => (
-            <button class="filter-btn" data-filter={cat.toLowerCase()} role="tab" aria-selected="false">{cat}</button>
+            <button class="filter-btn" data-filter={cat.toLowerCase()} data-label={cat} role="tab" aria-selected="false">
+              {cat} <span class="filter-count">{countFor(cat)}</span>
+            </button>
           ))}
         </div>
         <p class="filter-status" id="filterStatus" aria-live="polite">Showing all {site.gallery.length} photos</p>
@@ -38,13 +58,20 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
             class={`gallery-item reveal reveal-delay-${(i % 4) + 1}`}
             data-category={item.category.toLowerCase()}
           >
-            <button class="gallery-img-wrap" data-lightbox type="button" aria-label={`View full size: ${item.alt}`}>
+            <button
+              class="gallery-img-wrap"
+              data-lightbox
+              data-full={fullImages[i]}
+              data-caption={item.alt}
+              type="button"
+              aria-label={`View full size: ${item.alt}`}
+            >
               <Picture
                 src={img(item.src)}
                 formats={['avif', 'webp']}
                 fallbackFormat="webp"
                 widths={widthsFor(img(item.src), [300, 480, 700, 900])}
-                sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 300px"
+                sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 320px"
                 alt={item.alt}
               />
               <div class="gallery-overlay">
@@ -63,8 +90,15 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     <button class="lightbox-close" aria-label="Close preview">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
     <img id="lightboxImg" src="" alt="" />
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
     <p class="lightbox-caption" id="lightboxCaption"></p>
+    <span class="lightbox-counter" id="lightboxCounter" aria-hidden="true"></span>
   </div>
 
   <CTABanner
@@ -87,7 +121,7 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
 <style>
   .gallery-toolbar {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .gallery-filters {
@@ -99,10 +133,13 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
   }
 
   .filter-btn {
-    padding: 0.7rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.2rem;
     min-height: 2.75rem;
     background: var(--white);
-    border: 1px solid rgba(20, 54, 44, 0.12);
+    border: 1px solid rgba(20, 54, 44, 0.14);
     border-radius: var(--radius-full);
     font-family: var(--font-body);
     font-size: 0.72rem;
@@ -111,11 +148,26 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     letter-spacing: 1px;
     color: var(--forest-medium);
     cursor: pointer;
-    transition: all var(--transition);
+    transition: color var(--transition), border-color var(--transition), background var(--transition);
+  }
+
+  .filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding: 0 0.35rem;
+    border-radius: var(--radius-full);
+    background: rgba(20, 54, 44, 0.08);
+    color: var(--forest-light);
+    font-size: 0.66rem;
+    letter-spacing: 0;
+    transition: background var(--transition), color var(--transition);
   }
 
   .filter-btn:hover {
-    border-color: var(--forest-deep);
+    border-color: var(--tropical-coral);
     color: var(--forest-deep);
   }
 
@@ -126,19 +178,26 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     box-shadow: var(--shadow-sm);
   }
 
+  .filter-btn.active .filter-count {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+  }
+
   .filter-status {
     font-size: 0.8rem;
     color: var(--forest-light);
     margin-bottom: 0;
   }
 
+  /* Masonry columns — photos keep their natural aspect ratio */
   .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-    gap: 1.5rem;
+    column-count: 3;
+    column-gap: 1.25rem;
   }
 
   .gallery-item {
+    break-inside: avoid;
+    margin: 0 0 1.25rem;
     transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
   }
 
@@ -157,33 +216,32 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     background: none;
-    transition: box-shadow var(--transition);
+    transition: box-shadow var(--transition), transform var(--transition);
   }
 
   .gallery-img-wrap:hover {
     box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
   }
 
   .gallery-img-wrap img {
+    display: block;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: auto;
     transition: transform 0.55s var(--ease-out);
   }
 
   .gallery-img-wrap:hover img {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 
   .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(20, 54, 44, 0.75) 0%, rgba(20, 54, 44, 0.1) 60%);
+    background: linear-gradient(to top, rgba(20, 54, 44, 0.55) 0%, rgba(20, 54, 44, 0.05) 55%);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding: 1.25rem;
-    gap: 0.5rem;
+    justify-content: center;
     opacity: 0;
     transition: opacity var(--transition);
   }
@@ -195,8 +253,7 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
 
   @media (hover: none) {
     .gallery-overlay {
-      opacity: 1;
-      background: linear-gradient(to top, rgba(20, 54, 44, 0.35) 0%, rgba(20, 54, 44, 0) 55%);
+      opacity: 0;
     }
 
     .gallery-img-wrap img {
@@ -205,20 +262,46 @@ const categories = [...new Set(site.gallery.map((item) => item.category))];
   }
 
   .gallery-zoom {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.18);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     border-radius: var(--radius-full);
     color: var(--white);
+    transform: scale(0.85);
+    transition: transform var(--transition);
   }
 
+  .gallery-img-wrap:hover .gallery-zoom,
+  .gallery-img-wrap:focus-visible .gallery-zoom {
+    transform: scale(1);
+  }
+
+  @media (max-width: 900px) {
+    .gallery-grid {
+      column-count: 2;
+      column-gap: 1rem;
+    }
+
+    .gallery-item {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .gallery-grid {
+      column-count: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-img-wrap:hover,
+    .gallery-img-wrap:hover img {
+      transform: none;
+    }
+  }
 </style>
