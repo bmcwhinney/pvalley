@@ -15,7 +15,7 @@
 
   --font-display: 'Lora', Georgia, 'Times New Roman', serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
-  --font-script: 'Gochi Hand', 'Segoe Script', cursive;
+  --font-script: 'Handlee', 'Segoe Script', cursive;
 
   --spacing-section: clamp(4rem, 8vw, 6.25rem);
   --container-width: 1140px;
