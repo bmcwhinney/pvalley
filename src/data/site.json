@@ -113,6 +113,7 @@
     { "src": "/images/peacock-perch.webp", "alt": "A resident peacock in full plumage among the tropical foliage", "category": "Wildlife" },
     { "src": "/images/garden-arch.webp", "alt": "Flowering archway framing the tropical gardens", "category": "Grounds" },
     { "src": "/images/pvalley.webp", "alt": "Aerial view of Paradise Valley botanical estate", "category": "Grounds" },
+    { "src": "/images/scenic-tours.webp", "alt": "A guide leading visitors up a hillside trail through lush tropical gardens at Paradise Valley", "category": "Grounds" },
     { "src": "/images/peacock-porch.webp", "alt": "Peacock perched on a garden verandah railing", "category": "Wildlife" },
     { "src": "/images/estate-tree.webp", "alt": "Ancient buttress-rooted tree on the estate grounds", "category": "Grounds" },
     { "src": "/images/jazzandarts.webp", "alt": "Jazz and Arts festival at Paradise Valley", "category": "Jazz & Arts" },
@@ -132,7 +133,8 @@
     { "src": "/images/donkey-and-dog.webp", "alt": "A dog leading a resident donkey across the estate grounds", "category": "Wildlife" },
     { "src": "/images/grounds-statue-flowers.webp", "alt": "Red crown-of-thorns blooms beside a stone statue and garden pavilion", "category": "Grounds" },
     { "src": "/images/lotus-pond.webp", "alt": "Pink lotus flower blooming on a garden pond", "category": "Grounds" },
-    { "src": "/images/garden-arch-purple.webp", "alt": "Purple-flowering archway over a brick garden path", "category": "Grounds" }
+    { "src": "/images/garden-arch-purple.webp", "alt": "Purple-flowering archway over a brick garden path", "category": "Grounds" },
+    { "src": "/images/wedding-welcome-sign.webp", "alt": "A welcome sign on an easel among tropical planting at a wedding on the Paradise Valley grounds", "category": "Grounds" }
   ],
   "about": {
     "hero": {
