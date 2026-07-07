@@ -2,6 +2,7 @@
   'use strict';
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const desktopNavQuery = window.matchMedia('(min-width: 1101px)');
   let lastScrollY = 0;
   let ticking = false;
   let lightboxItems = [];
@@ -334,8 +335,10 @@
 
         if (navbar) {
           navbar.classList.toggle('scrolled', scrollY > 50);
-          if (!navbar.classList.contains('nav--inner')) {
+          if (desktopNavQuery.matches) {
             navbar.classList.toggle('nav--hidden', scrollY > lastScrollY && scrollY > 200);
+          } else {
+            navbar.classList.remove('nav--hidden');
           }
         }
 
@@ -343,6 +346,16 @@
         lastScrollY = scrollY;
         ticking = false;
       });
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    'resize',
+    () => {
+      if (!desktopNavQuery.matches) {
+        getEl('navbar')?.classList.remove('nav--hidden');
+      }
     },
     { passive: true }
   );

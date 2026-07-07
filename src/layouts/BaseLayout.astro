@@ -25,7 +25,10 @@ const { name, url, email, phone, address, geo } = site;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageTitle = title === name ? `${name} | Botanical Garden & Nursery in Dominica` : `${title} | ${name}`;
 const pageDescription = description ?? `Discover ${name} — a 60-acre botanical sanctuary in Borne, Dominica.`;
-const ogImage = image.startsWith('http') ? image : `${url}${image}`;
+
+// Dedicated share image — always PNG so og:image:type matches the fetched file.
+const socialShareImage = '/images/pvsocialshare.png';
+const ogImage = `${url}${socialShareImage}`;
 
 const businessDescription = `${name} is a 60-acre botanical garden and plant nursery in Borne, St. John, Dominica, offering scenic tours, weddings and events, landscaping, rare tropical plants, gardening supplies, and the annual Jazz & Arts festival.`;
 
