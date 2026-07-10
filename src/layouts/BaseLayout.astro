@@ -148,11 +148,11 @@ const openingHours = [
         <feGaussianBlur in="noise" stdDeviation="0.55" result="softNoise" />
         <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="5.5" xChannelSelector="R" yChannelSelector="G" />
       </filter>
-      <!-- Widescreen / hi-DPI: even finer grain to avoid chunky edges -->
+      <!-- Widescreen / hi-DPI: finer grain, still clearly hand-drawn -->
       <filter id="crayon-edge-fine" x="-14%" y="-14%" width="128%" height="128%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.04 0.048" numOctaves="2" seed="7" result="noise" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.032 0.04" numOctaves="2" seed="7" result="noise" />
         <feGaussianBlur in="noise" stdDeviation="0.45" result="softNoise" />
-        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="4" xChannelSelector="R" yChannelSelector="G" />
+        <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="5.5" xChannelSelector="R" yChannelSelector="G" />
       </filter>
       <!-- Mobile: cheap 1-octave pass -->
       <filter id="crayon-edge-lite" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">

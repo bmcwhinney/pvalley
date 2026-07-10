@@ -37,8 +37,7 @@
   /* Hand-drawn crayon edge.
      - Default desktop: refined filter (finer noise, milder displace)
      - Mobile: cheap lite filter
-     - Widescreen / retina desktop: finer grain to avoid chunky edges
-     - Ultra-wide: off (filter buffers still break down past ~1600px) */
+     - Widescreen / retina: finer grain so edges stay crisp without dropping the look */
   --crayon-filter: url(#crayon-edge);
 }
 
@@ -57,12 +56,6 @@
 @media (min-resolution: 2dppx) and (min-width: 901px) {
   :root {
     --crayon-filter: url(#crayon-edge-fine);
-  }
-}
-
-@media (min-width: 1600px) {
-  :root {
-    --crayon-filter: none;
   }
 }
 
