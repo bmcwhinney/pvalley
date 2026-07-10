@@ -142,10 +142,16 @@ const openingHours = [
   <a href="#main-content" class="skip-link">Skip to content</a>
   <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
     <defs>
+      <!-- Full crayon edge for desktop -->
       <filter id="crayon-edge" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.013 0.017" numOctaves="3" seed="7" result="noise" />
         <feGaussianBlur in="noise" stdDeviation="0.4" result="softNoise" />
         <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="9" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <!-- Lighter crayon for mobile: 1 octave, no blur, smaller displace -->
+      <filter id="crayon-edge-lite" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035 0.04" numOctaves="1" seed="7" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.5" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
   </svg>

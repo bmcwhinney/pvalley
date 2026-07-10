@@ -34,12 +34,25 @@
   --transition: 0.3s var(--ease-out);
   --transition-slow: 0.7s var(--ease-out);
 
-  /* Hand-drawn crayon edge. Off on mobile (expensive SVG filter) and on
-     very large/hi-DPI screens where the filter buffer looks pixelated. */
+  /* Hand-drawn crayon edge. Full filter on desktop; a cheaper 1-octave
+     lite filter on mobile so the squiggle stays without the paint cost.
+     Off on very large/hi-DPI screens where the filter buffer looks pixelated. */
   --crayon-filter: url(#crayon-edge);
 }
 
-@media (max-width: 900px), (min-width: 2000px) {
+@media (max-width: 900px) {
+  :root {
+    --crayon-filter: url(#crayon-edge-lite);
+  }
+}
+
+@media (min-width: 2000px) {
+  :root {
+    --crayon-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   :root {
     --crayon-filter: none;
   }
