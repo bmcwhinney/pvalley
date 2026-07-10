@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import BackToTop from '../components/BackToTop.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import QuickActions from '../components/QuickActions.astro';
 
 interface Props {
@@ -25,6 +26,7 @@ const quickActions = showQuickActions || currentPath.startsWith('/visit');
     <slot />
   </main>
   <Footer />
+  <WhatsAppFloat />
   <BackToTop />
   {quickActions && <QuickActions />}
 </BaseLayout>

@@ -330,10 +330,10 @@ address { font-style: normal; }
 .stagger-children .reveal:nth-child(5) { transition-delay: 0.25s; }
 .stagger-children .reveal:nth-child(6) { transition-delay: 0.3s; }
 
-/* ─── Back to Top ─── */
+/* ─── Back to Top (sits above the WhatsApp float) ─── */
 .back-to-top {
   position: fixed;
-  bottom: 2rem;
+  bottom: calc(2rem + 56px + 0.75rem);
   right: 2rem;
   z-index: 900;
   width: 48px;
@@ -573,12 +573,12 @@ body.menu-open {
     padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
   }
   .back-to-top {
-    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(1.5rem + 52px + 0.75rem + env(safe-area-inset-bottom, 0px));
     right: 1.25rem;
   }
   /* Lift clear of the quick-actions bar only on pages that show it */
   body:has(.quick-actions) .back-to-top {
-    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(5.5rem + 52px + 0.75rem + env(safe-area-inset-bottom, 0px));
   }
 
   .btn {

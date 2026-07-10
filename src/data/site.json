@@ -23,7 +23,9 @@
     { "days": "Sat – Sun", "time": "10:00 AM – 6:00 PM" }
   ],
   "social": {
-    "instagram": "https://www.instagram.com/p.aradise_v.alley?igsh=MWtwOHV2dWZsZ3duMw=="
+    "instagram": "https://www.instagram.com/p.aradise_v.alley?igsh=MWtwOHV2dWZsZ3duMw==",
+    "whatsapp": "+17672259199",
+    "whatsappDisplay": "+1 (767) 225-9199"
   },
   "nav": [
     { "label": "Home", "href": "/" },
