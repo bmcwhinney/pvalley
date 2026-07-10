@@ -34,9 +34,11 @@
   --transition: 0.3s var(--ease-out);
   --transition-slow: 0.7s var(--ease-out);
 
-  /* Hand-drawn crayon edge. Full filter on desktop; a cheaper 1-octave
-     lite filter on mobile so the squiggle stays without the paint cost.
-     Off on very large/hi-DPI screens where the filter buffer looks pixelated. */
+  /* Hand-drawn crayon edge.
+     - Default desktop: refined filter (finer noise, milder displace)
+     - Mobile: cheap lite filter
+     - Widescreen / retina desktop: finer grain to avoid chunky edges
+     - Ultra-wide: off (filter buffers still break down past ~1600px) */
   --crayon-filter: url(#crayon-edge);
 }
 
@@ -46,7 +48,19 @@
   }
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1200px) {
+  :root {
+    --crayon-filter: url(#crayon-edge-fine);
+  }
+}
+
+@media (min-resolution: 2dppx) and (min-width: 901px) {
+  :root {
+    --crayon-filter: url(#crayon-edge-fine);
+  }
+}
+
+@media (min-width: 1600px) {
   :root {
     --crayon-filter: none;
   }
