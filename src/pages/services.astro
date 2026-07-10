@@ -68,8 +68,9 @@ const serviceImages = [
               src={img(image.src)}
               formats={['avif', 'webp']}
               fallbackFormat="webp"
-              widths={widthsFor(img(image.src), [400, 600, 800])}
+              widths={widthsFor(img(image.src), [360, 540, 720])}
               sizes="(max-width: 900px) 92vw, 600px"
+              quality={70}
               alt={image.alt}
             />
           </figure>

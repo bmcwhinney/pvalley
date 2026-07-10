@@ -44,8 +44,9 @@ const { about } = site;
             src={img(section.image)}
             formats={['avif', 'webp']}
             fallbackFormat="webp"
-            widths={widthsFor(img(section.image), [400, 600, 800])}
+            widths={widthsFor(img(section.image), [360, 540, 720])}
             sizes="(max-width: 900px) 92vw, 540px"
+            quality={70}
             alt={section.imageAlt}
           />
         </figure>

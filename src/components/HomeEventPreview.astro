@@ -13,8 +13,9 @@ const eventImg = img(event.image);
         src={eventImg}
         formats={['avif', 'webp']}
         fallbackFormat="webp"
-        widths={widthsFor(eventImg, [400, 600, 800])}
+        widths={widthsFor(eventImg, [360, 540, 720])}
         sizes="(max-width: 900px) 92vw, 620px"
+        quality={70}
         alt={event.title}
       />
     </figure>

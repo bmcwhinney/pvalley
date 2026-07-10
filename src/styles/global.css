@@ -34,14 +34,12 @@
   --transition: 0.3s var(--ease-out);
   --transition-slow: 0.7s var(--ease-out);
 
-  /* Hand-drawn crayon edge. Routed through a variable so it can be
-     switched off on very large/hi-DPI screens, where the browser
-     downsamples the filter's intermediate buffer and it looks
-     pixelated. The uneven radii + rotation keep the sketchy look. */
+  /* Hand-drawn crayon edge. Off on mobile (expensive SVG filter) and on
+     very large/hi-DPI screens where the filter buffer looks pixelated. */
   --crayon-filter: url(#crayon-edge);
 }
 
-@media (min-width: 2000px) {
+@media (max-width: 900px), (min-width: 2000px) {
   :root {
     --crayon-filter: none;
   }
@@ -201,7 +199,7 @@ address { font-style: normal; }
   color: var(--forest-deep);
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.01em;
   border: none;
   cursor: pointer;
@@ -309,7 +307,6 @@ address { font-style: normal; }
   opacity: 0;
   transform: translateY(28px);
   transition: opacity var(--transition-slow), transform var(--transition-slow);
-  will-change: opacity, transform;
 }
 
 .reveal.visible {

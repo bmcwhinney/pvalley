@@ -74,8 +74,9 @@ const eventSchema = site.events.map((event) => {
               src={img(event.image)}
               formats={['avif', 'webp']}
               fallbackFormat="webp"
-              widths={widthsFor(img(event.image), [400, 600, 800])}
+              widths={widthsFor(img(event.image), [360, 540, 720])}
               sizes="(max-width: 900px) 92vw, 560px"
+              quality={70}
               alt={event.title}
             />
           </figure>

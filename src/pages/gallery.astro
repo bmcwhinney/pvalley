@@ -17,8 +17,8 @@ const fullImages = await Promise.all(
     const large = await getImage({
       src: meta,
       format: 'webp',
-      width: Math.min(1600, meta.width),
-      quality: 82,
+      width: Math.min(1200, meta.width),
+      quality: 72,
     });
     return large.src;
   }),
@@ -69,8 +69,9 @@ const fullImages = await Promise.all(
                 src={img(item.src)}
                 formats={['avif', 'webp']}
                 fallbackFormat="webp"
-                widths={widthsFor(img(item.src), [300, 480, 700, 900])}
+                widths={widthsFor(img(item.src), [280, 400, 560, 720])}
                 sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 320px"
+                quality={68}
                 alt={item.alt}
               />
               <div class="gallery-overlay">

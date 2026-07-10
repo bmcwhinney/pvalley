@@ -29,8 +29,9 @@ const peacock = img('/images/peacock-perch.webp');
           src={peacock}
           formats={['avif', 'webp']}
           fallbackFormat="webp"
-          widths={widthsFor(peacock, [400, 600])}
+          widths={widthsFor(peacock, [360, 540])}
           sizes="(max-width: 900px) 92vw, 560px"
+          quality={70}
           alt="A resident peacock in full plumage among the tropical foliage"
         />
       </div>

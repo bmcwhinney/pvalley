@@ -47,6 +47,10 @@
 
   function preloadLightboxNeighbors() {
     if (lightboxItems.length < 2) return;
+    // Skip neighbor preload on slow / data-saver connections.
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn && (conn.saveData || /2g|slow-2g|3g/i.test(conn.effectiveType || ''))) return;
+
     [lightboxIndex - 1, lightboxIndex + 1].forEach((i) => {
       const trigger = lightboxItems[(i + lightboxItems.length) % lightboxItems.length];
       const src = trigger && trigger.getAttribute('data-full');
@@ -272,6 +276,21 @@
 
     if (target.closest('#backToTop')) {
       window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+
+    const loadMap = target.closest('#loadMap');
+    if (loadMap) {
+      const wrap = loadMap.closest('[data-map-src]');
+      const src = wrap?.getAttribute('data-map-src');
+      if (wrap && src) {
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = 'Map showing Paradise Valley Garden & Nursery location in Borne, Dominica';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.allow = 'fullscreen';
+        iframe.loading = 'lazy';
+        wrap.replaceChildren(iframe);
+      }
     }
   });
 
