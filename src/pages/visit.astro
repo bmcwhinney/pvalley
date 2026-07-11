@@ -86,14 +86,14 @@ const mapUrl = site.mapsUrl;
 
         <div class="visit-map reveal reveal-delay-2">
           <figure class="map-figure">
-            <div class="map-wrap" id="mapWrap" data-map-src={embedUrl}>
-              <button type="button" class="map-facade" id="loadMap" aria-label="Load interactive map">
-                <span class="map-facade-label">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  Load map
-                </span>
-                <span class="map-facade-hint">Opens Google Maps embed</span>
-              </button>
+            <div class="map-wrap">
+              <iframe
+                src={embedUrl}
+                title="Map showing Paradise Valley Garden & Nursery location in Borne, Dominica"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allow="fullscreen"
+              ></iframe>
             </div>
           </figure>
           <p class="directions-text">{visit.directions}</p>
@@ -287,14 +287,10 @@ const mapUrl = site.mapsUrl;
   }
 
   .map-wrap {
-    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     aspect-ratio: 4 / 3;
-    background:
-      linear-gradient(135deg, rgba(18, 71, 52, 0.12), rgba(18, 71, 52, 0.28)),
-      var(--mist);
   }
 
   .map-wrap iframe {
@@ -302,49 +298,6 @@ const mapUrl = site.mapsUrl;
     height: 100%;
     border: 0;
     display: block;
-  }
-
-  .map-facade {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: var(--forest-deep);
-    font-family: var(--font-body);
-    transition: background var(--transition);
-  }
-
-  .map-facade:hover {
-    background: rgba(18, 71, 52, 0.06);
-  }
-
-  .map-facade-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.7rem 1.25rem;
-    background: var(--white);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-sm);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .map-facade-label svg {
-    color: var(--tropical-coral);
-  }
-
-  .map-facade-hint {
-    font-size: 0.75rem;
-    color: var(--forest-light);
   }
 
   .directions-text {
